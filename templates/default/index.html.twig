@@ -16,40 +16,44 @@
                     </p>
                     <p>Jours a venir</p>
                 </div>
-                <div class="row">
-                        {# CARTE PROCHE #}
-                        <div class="card m-3" style="width: 18rem;">
-                            <div class="card-body">
-                                <div class="card-title flex">
-                                    <img src="#" alt="proche">
-                                    <h5>Proche 1</h5>
+                <div class="col-8">
+                    <h3>Chez les proches</h3>
+                        <div class="row">
+                            {# CARTE PROCHE #}
+                            <div class="card m-3" style="width: 18rem;">
+                                <div class="card-body">
+                                    <div class="card-title flex">
+                                        <img src="#" alt="proche">
+                                        <h5>Proche 1</h5>
+                                    </div>
+                                    {# pour créer un lien vers dees fichier qui se situe dans le dossier public on utilise la fonction twig asset() #}
+                                    {# https://symfony.com/doc/current/templates.html#linking-to-css-javascript-and-image-assets #}
+                                    {# le caractere ~ permet de concatener plusieur chaines en twig #}
+                                    <img class="card-img-top" src="#" width="50px" alt="meteo"/>
+                                    
+                                    {# je genere une URL vers une route de mon application grace a la fonction twig path() #}
+                                    {# je fourni au generateur d'url la valeur qui va remplacer la partie variable de l'URL de notre route #}
+                                    <a href="#">Ville</a>
+                                    <p>Date : temp min C / temp max C<br>
+                                    Horaires soleil<br>
+                                    Vent</p>
                                 </div>
-                                {# pour créer un lien vers dees fichier qui se situe dans le dossier public on utilise la fonction twig asset() #}
-                                {# https://symfony.com/doc/current/templates.html#linking-to-css-javascript-and-image-assets #}
-                                {# le caractere ~ permet de concatener plusieur chaines en twig #}
-                                <img class="card-img-top" src="#" width="50px" alt="meteo"/>
-                                
-                                {# je genere une URL vers une route de mon application grace a la fonction twig path() #}
-                                {# je fourni au generateur d'url la valeur qui va remplacer la partie variable de l'URL de notre route #}
-                                <a href="#">Ville</a>
-                                <p>Date : temp min C / temp max C<br>
-                                Horaires soleil<br>
-                                Vent</p>
                             </div>
-                        </div>
-                        {# CARTE PROCHE #}
-                        <div class="card m-3" style="width: 18rem;">
-                            <div class="card-body">
-                                <div class="card-title flex">
-                                    <img src="#" alt="proche">
-                                    <h5>Proche 2</h5>
+                            {# CARTE PROCHE #}
+                            <div class="card m-3" style="width: 18rem;">
+                                <div class="card-body">
+                                    <div class="card-title flex">
+                                        <img src="#" alt="proche">
+                                        <h5>Proche 2</h5>
+                                    </div>
+                                    <img class="card-img-top" src="#" width="50px" alt="meteo"/>
+                                    <a href="#">Ville</a>
+                                    <p>Date : temp min C / temp max C<br>
+                                    Horaires soleil<br>
+                                    Vent</p>
                                 </div>
-                                <img class="card-img-top" src="#" width="50px" alt="meteo"/>
-                                <a href="#">Ville</a>
-                                <p>Date : temp min C / temp max C<br>
-                                Horaires soleil<br>
-                                Vent</p>
                             </div>
+
                         </div>
                 </div>
             </div>
