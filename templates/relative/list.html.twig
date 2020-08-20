@@ -2,9 +2,20 @@
 
 {% block body %}
 
+<div class="d-flex flex-row justify-content-between">
+    <h2>Liste des proches</h2>
+    <div>
+        <a href="{{ path('relative_add') }}" class="btn btn-primary">Ajouter</a>
+    </div>
+</div>
+
 <ul class="list-group">
 {% for relative in relatives %}
-        <li class="list-group-item list-group-item-action">{{ relative.firstname }} {{ relative.lastname }}</li>
+        <li class="list-group-item list-group-item-action">
+                <a href="{{ path('relative_view', {id: relative.id}) }}">
+                        {{ relative.firstname }} {{ relative.lastname }}
+                </a>
+        </li>
 {% endfor %}
 </ul>
 

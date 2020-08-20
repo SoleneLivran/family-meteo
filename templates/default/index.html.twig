@@ -2,11 +2,21 @@
 
 {% block body %}
 
+{#
+https://www.flaticon.com/packs/weather-53?word=weather
+https://www.flaticon.com/packs/weather-158?word=weather 
+https://www.flaticon.com/packs/weather-407?word=weather
+https://www.flaticon.com/packs/weather-161?word=weather
+https://www.flaticon.com/packs/weather-375?word=weather
+https://www.flaticon.com/packs/weather-351?word=weather
+https://www.flaticon.com/packs/weather-forecast?word=weather
+#}
+
     <div class="container-fluid">
         <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 <h1>Bienvenue sur la météo des proches !</h1>
-                <div class="col-8">
+                <div class="col-12">
                     <h3>A la maison</h3>
                     <img class="card-img-top" src="#" width="50px" alt="meteo"/>
                     <p>
@@ -16,24 +26,28 @@
                     </p>
                     <p>Jours a venir</p>
                 </div>
-                <div class="col-8">
+                <div class="col-12">
                     <h3>Chez les proches</h3>
                         <div class="row">
                             {# CARTE PROCHE #}
                             {% for home in homes %}
                             {% set meteo = meteos[home.id] %}
+                            {% set windInKmh = 3.114 %}
                             <div class="card m-3" style="width: 18rem;">
                                 <div class="card-body">
                                     <div class="card-title flex">
                                         <h5>
                                             Chez
-                                            {% for relative in home.relatives %}
-                                            {% if not loop.first %}
-                                            et
-                                            {% endif %}
-                                            {{ relative.firstname }}
-                                            {% endfor %}
+                                                {% for relative in home.relatives %}
+                                                    {% if not loop.first %}
+                                                    et
+                                                    {% endif %}
+                                                    <a href="{{ path('relative_view', {id: relative.id}) }}">
+                                                    {{ relative.firstname }}
+                                                    </a>
+                                                {% endfor %}
                                         </h5>
+                                        <ph6>À {{ home.cityName }}</ph6>
                                     </div>
                                     {# pour créer un lien vers dees fichier qui se situe dans le dossier public on utilise la fonction twig asset() #}
                                     {# https://symfony.com/doc/current/templates.html#linking-to-css-javascript-and-image-assets #}
@@ -42,11 +56,10 @@
                                     
                                     {# je genere une URL vers une route de mon application grace a la fonction twig path() #}
                                     {# je fourni au generateur d'url la valeur qui va remplacer la partie variable de l'URL de notre route #}
-                                    <a>{{ home.cityName }}</a>
                                     <p>{{ meteo.daily[0].dt|date("d/m") }} : {{ meteo.daily[0].temp.min }} C / {{ meteo.daily[0].temp.max }} C<br>
                                     Lever du soleil : {{ meteo.daily[0].sunrise|date("H\\hi") }}<br>
                                     Coucher du soleil : {{ meteo.daily[0].sunset|date("H\\hi") }}<br>
-                                    Vent : {{ meteo.daily[0].wind_speed }}</p>
+                                    Vent : {{ (meteo.daily[0].wind_speed)*windInKmh|round }} km/h</p>
                                 </div>
                             </div>
                             {% endfor %}
@@ -56,5 +69,7 @@
             </div>
         </div>
     </div>
+    
+    <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 {% endblock %}

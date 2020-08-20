@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Home;
 use App\Entity\Relative;
+use App\Form\RelativeType;
 use App\Repository\RelativeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +25,80 @@ class RelativeController extends AbstractController
             'relative/list.html.twig',
             [
                 "relatives" => $relatives
+            ]
+        );
+    }
+
+    /**
+     * @Route("/relatives/{id}", name="relative_view", requirements={"id"="\d+"})
+     */
+    public function view($id)
+    {
+        /** @var RelativeRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Relative::class);
+        $relative = $repository->find($id);
+        
+        return $this->render(
+            'relative/view.html.twig',
+            [
+                "relative" => $relative
+            ]
+        );
+    }
+
+    /**
+     * @Route("/relatives/add", name="relative_add")
+     * 
+     */
+    public function add(Request $request)
+    {
+        $relative = new Relative();
+
+        $relativeForm = $this->createForm(RelativeType::class, $relative);
+        $relativeForm->handleRequest($request);
+        if($relativeForm->isSubmitted() && $relativeForm->isValid()) {
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($relative);
+            $manager->flush();
+
+            $this->addFlash("success", "Le proche a bien été ajouté");
+            return $this->redirectToRoute("relative_list");
+        }
+
+        return $this->render(
+            'relative/add.html.twig',
+            [
+                "relativeForm" => $relativeForm->createView()
+            ]
+        );
+    }
+
+    /**
+     * @Route("relatives/{id}/update", name="relative_update", requirements={"id"="\d+"})
+     */
+    public function update(Relative $relative, $id, Request $request)
+    {
+        /** @var RelativeRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Relative::class);
+        $relative = $repository->find($id);
+
+        $relativeForm = $this->createForm(RelativeType::class, $relative);
+        $relativeForm->handleRequest($request);
+        if($relativeForm->isSubmitted() && $relativeForm->isValid()) {
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($relative);
+            $manager->flush();
+
+            $this->addFlash("success", "Le proche a bien été modifié");
+            return $this->redirectToRoute("relative_list");
+        }
+
+        return $this->render(
+            'relative/add.html.twig',
+            [
+                "relativeForm" => $relativeForm->createView()
             ]
         );
     }
