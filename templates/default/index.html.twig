@@ -20,39 +20,36 @@
                     <h3>Chez les proches</h3>
                         <div class="row">
                             {# CARTE PROCHE #}
+                            {% for home in homes %}
+                            {% set meteo = meteos[home.id] %}
                             <div class="card m-3" style="width: 18rem;">
                                 <div class="card-body">
                                     <div class="card-title flex">
-                                        <img src="#" alt="proche">
-                                        <h5>Proche 1</h5>
+                                        <h5>
+                                            Chez
+                                            {% for relative in home.relatives %}
+                                            {% if not loop.first %}
+                                            et
+                                            {% endif %}
+                                            {{ relative.firstname }}
+                                            {% endfor %}
+                                        </h5>
                                     </div>
                                     {# pour créer un lien vers dees fichier qui se situe dans le dossier public on utilise la fonction twig asset() #}
                                     {# https://symfony.com/doc/current/templates.html#linking-to-css-javascript-and-image-assets #}
                                     {# le caractere ~ permet de concatener plusieur chaines en twig #}
-                                    <img class="card-img-top" src="#" width="50px" alt="meteo"/>
+                                    <img class="card-img-top" src="http://openweathermap.org/img/wn/{{ meteo.current.weather[0].icon }}@2x.png" width="50px" alt="{{ meteo.current.weather[0].main }}"/>
                                     
                                     {# je genere une URL vers une route de mon application grace a la fonction twig path() #}
                                     {# je fourni au generateur d'url la valeur qui va remplacer la partie variable de l'URL de notre route #}
-                                    <a href="#">Ville</a>
-                                    <p>Date : temp min C / temp max C<br>
-                                    Horaires soleil<br>
-                                    Vent</p>
+                                    <a>{{ home.cityName }}</a>
+                                    <p>{{ meteo.daily[0].dt|date("d/m") }} : {{ meteo.daily[0].temp.min }} C / {{ meteo.daily[0].temp.max }} C<br>
+                                    Lever du soleil : {{ meteo.daily[0].sunrise|date("H\\hi") }}<br>
+                                    Coucher du soleil : {{ meteo.daily[0].sunset|date("H\\hi") }}<br>
+                                    Vent : {{ meteo.daily[0].wind_speed }}</p>
                                 </div>
                             </div>
-                            {# CARTE PROCHE #}
-                            <div class="card m-3" style="width: 18rem;">
-                                <div class="card-body">
-                                    <div class="card-title flex">
-                                        <img src="#" alt="proche">
-                                        <h5>Proche 2</h5>
-                                    </div>
-                                    <img class="card-img-top" src="#" width="50px" alt="meteo"/>
-                                    <a href="#">Ville</a>
-                                    <p>Date : temp min C / temp max C<br>
-                                    Horaires soleil<br>
-                                    Vent</p>
-                                </div>
-                            </div>
+                            {% endfor %}
 
                         </div>
                 </div>

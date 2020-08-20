@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<ul class="list-group">
+{% for relative in relatives %}
+        <li class="list-group-item list-group-item-action">{{ relative.firstname }} {{ relative.lastname }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
