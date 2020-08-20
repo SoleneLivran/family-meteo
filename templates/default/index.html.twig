@@ -16,7 +16,8 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
         <div class="row">
             <div class="col-12">
                 <h1>Bienvenue sur la météo des proches !</h1>
-                <div class="col-12">
+                <blockquote>{{ random(quote) }}</blockquote>
+                {# <div class="col-12"> #}
                     <h3>A la maison</h3>
                     <img class="card-img-top" src="#" width="50px" alt="meteo"/>
                     <p>
@@ -25,8 +26,8 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                         Vent
                     </p>
                     <p>Jours a venir</p>
-                </div>
-                <div class="col-12">
+                {# </div> #}
+                {# <div class="col-12"> #}
                     <h3>Chez les proches</h3>
                         <div class="row">
                             {# CARTE PROCHE #}
@@ -65,7 +66,7 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                             {% endfor %}
 
                         </div>
-                </div>
+                {# </div> #}
             </div>
         </div>
     </div>

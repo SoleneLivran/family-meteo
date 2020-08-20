@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Home;
+use App\Model\QuoteModel;
 use App\Service\MeteoFinder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,6 +38,7 @@ class DefaultController extends AbstractController
             [
                 "homes" => $homes,
                 "meteos" => $meteos,
+                "quote" => QuoteModel::getQuote(),
             ]
         );
     }
