@@ -19,4 +19,5 @@ class QuoteModel
         'Hier n’existe plus , demain ne viendra peut-être jamais. Il n’y a que le miracle du moment présent, savoure-le. C’est un cadeau! ~Marie Stilkind',
         'C’est votre attitude, bien plus que votre aptitude, qui détermine votre altitude. ~Zig Ziglar',
     ];
+    // https://www.positivia.fr/citations-bonheur-citation-motivation/
 }
