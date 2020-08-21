@@ -13,14 +13,15 @@ class AddressCoordinatesFinder
         $this->apiKey = $apiKey;
     }
 
-    public function getLatitudeAndLongitude($postcode) : array
-    {
-        $client = new Client(['base_uri' => 'http://api.positionstack.com']);
-        $res = $client->request('GET', '/v1/forward', [
+    public function getLatitudeAndLongitude($city, $postalcode)
+    {   
+        $client = new Client(['base_uri' => 'https://eu1.locationiq.com']);
+        $res = $client->request('GET', '/v1/search.php', [
             'query' => [
-                'access_key' => $this->apiKey,
-                'query' => $postcode,
-                'country' => 'fr'
+                'key' => $this->apiKey,
+                'city' => $city,
+                'postalcode' => $postalcode,
+                'format' => 'json'
             ],
         ]);
 

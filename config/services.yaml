@@ -5,7 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     oppenweathermap_api_key: '%env(resolve:OPENWEATHERMAPP_API_KEY)%'
-    positionstack_api_key: '%env(resolve:POSITIONSTACK_API_KEY)%'
+    locationiq_api_key: '%env(resolve:LOCATIONIQ_API_KEY)%'
 
 services:
     # default configuration for services in *this* file
@@ -38,4 +38,4 @@ services:
 
     App\Service\AddressCoordinatesFinder:
         arguments:
-            $apiKey: "%positionstack_api_key%"
+            $apiKey: "%locationiq_api_key%"

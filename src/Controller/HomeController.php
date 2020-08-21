@@ -29,13 +29,12 @@ class HomeController extends AbstractController
         $homeForm = $this->createForm(HomeType::class, $home);
         $homeForm->handleRequest($request);
         if($homeForm->isSubmitted() && $homeForm->isValid()) {
+            $coordinates = $this->addressCoordinatesFinder->getLatitudeAndLongitude($home->getCityName(), $home->getPostCode());
 
-            $coordinates = $this->addressCoordinatesFinder->getLatitudeAndLongitude($home->getPostCode());
-
-            $latitude = $coordinates['data'][0]['latitude'];
+            $latitude = $coordinates[0]['lat'];
             $home->setLatitude($latitude);
 
-            $longitude = $coordinates['data'][0]['longitude'];
+            $longitude = $coordinates[0]['lon'];
             $home->setLongitude($longitude);
 
             $manager = $this->getDoctrine()->getManager();
