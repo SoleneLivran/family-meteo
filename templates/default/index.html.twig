@@ -43,7 +43,7 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                                         <img src="{{ asset('images/weathericons/wind.png') }}" width="40px" alt="Vent"/>
                                             {{ (meteo.daily[0].wind_speed)*windInKmh|round }} km/h
                                     </p>
-                                    <p>Jours a venir :</p>
+                                    <p>Jours à venir :</p>
                                     <img src="{{ asset('images/weathericons/' ~ meteo.daily[1].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
                                     <img src="{{ asset('images/weathericons/' ~ meteo.daily[2].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
                                     <img src="{{ asset('images/weathericons/' ~ meteo.daily[3].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
@@ -82,24 +82,24 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                                             </h5>
                                             <ph6>À {{ home.cityName }}</ph6>
                                         </div>
-                                        <img class="card-img-top" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" alt="{{ meteo.current.weather[0].description }}"/>
+                                        <img class="card-img-top mb-3" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" alt="{{ meteo.current.weather[0].description }}"/>
                                         
-                                        <p>
-                                            <img src="{{ asset('images/weathericons/temperature.png') }}" width="40px" alt="Temperature"/>
-                                                {{ meteo.current.temp|number_format }} °C
-                                        </p>
-                                        <p>
-                                            <img src="{{ asset('images/weathericons/sunrise.png') }}" width="40px" alt="Lever du soleil"/>
-                                                {{ meteo.daily[0].sunrise|date("H\\hi") }}
-                                        </p>
-                                        <p>
-                                            <img src="{{ asset('images/weathericons/sunset.png') }}" width="40px" alt="Coucher du soleil"/>
-                                                {{ meteo.daily[0].sunset|date("H\\hi") }}
-                                        </p>
-                                        <p>
-                                            <img src="{{ asset('images/weathericons/wind.png') }}" width="40px" alt="Vent"/>
-                                                {{ (meteo.daily[0].wind_speed)*windInKmh|round }} km/h
-                                        </p>
+                                        <div>
+                                            <p>
+                                                <img src="{{ asset('images/weathericons/temperature.png') }}" width="40px" alt="Temperature"/>
+                                                    {{ meteo.current.temp|number_format }} °C
+                                            </p>
+                                            <p>
+                                                <img src="{{ asset('images/weathericons/sunrise.png') }}" width="40px" alt="Lever du soleil"/>
+                                                    {{ meteo.daily[0].sunrise|date("H\\hi") }}
+                                                <img src="{{ asset('images/weathericons/sunset.png') }}" width="40px" alt="Coucher du soleil"/>
+                                                    {{ meteo.daily[0].sunset|date("H\\hi") }}
+                                            </p>
+                                            <p>
+                                                <img src="{{ asset('images/weathericons/wind.png') }}" width="40px" alt="Vent"/>
+                                                    {{ (meteo.daily[0].wind_speed)*windInKmh|round }} km/h
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                                 {% endif %}
