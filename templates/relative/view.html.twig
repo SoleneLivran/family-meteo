@@ -9,6 +9,10 @@
     </div>
 </div>
 
-<p>{{ relative.getHome().cityName }}</p>
+<p>&#127968; Vit a {{ relative.getHome().cityName }}, {{ relative.getHome().postCode }}</p>
+{% if relative.birthdate is not null %}
+<p>&#128197; Date de naissance : {{ relative.birthdate|date("d\\/m\\/Y") }}</p>
+{% endif %}
+
 
 {% endblock %}
