@@ -25,12 +25,12 @@ class Home
     private $postCode;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="float")
      */
     private $latitude;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="float")
      */
     private $longitude;
 
@@ -48,6 +48,11 @@ class Home
      * @ORM\Column(type="string", length=255)
      */
     private $cityName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $country;
 
     public function __construct()
     {
@@ -146,6 +151,18 @@ class Home
     public function setCityName(string $cityName): self
     {
         $this->cityName = $cityName;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }

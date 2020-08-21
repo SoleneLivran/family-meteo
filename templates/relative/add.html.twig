@@ -7,9 +7,14 @@
 	    {{ form_row(relativeForm.lastname) }}
 	    {{ form_row(relativeForm.birthdate) }}
 		{# TODO : mettre dans une div et ajouter bouton add #}
-	    {{ form_label(relativeForm.home) }}
+	    <div class="d-flex flex-row justify-content-between">
+	    	{{ form_label(relativeForm.home) }}
+			<div>
+				<a href="{{ path('home_add') }}" class="btn btn-primary p-1 mb-2">Ajouter</a>
+			</div>
+	    </div>
 	    {{ form_widget(relativeForm.home) }}
-	    <input type="submit" value="Valider" class="btn btn-primary">
+	    <input type="submit" value="Valider" class="btn btn-primary mt-3">
 	{{ form_end(relativeForm) }}
 
 {% endblock %}

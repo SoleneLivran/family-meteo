@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	{{ form_start(homeForm) }}
+	    {{ form_widget(homeForm) }}
+	    <input type="submit" value="Valider" class="btn btn-primary mt-3">
+	{{ form_end(homeForm) }}
+
+{% endblock %}
