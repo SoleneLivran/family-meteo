@@ -3,7 +3,12 @@
 {% block body %}
 
 	{{ form_start(relativeForm) }}
-	    {{ form_widget(relativeForm) }}
+	    {{ form_row(relativeForm.firstname) }}
+	    {{ form_row(relativeForm.lastname) }}
+	    {{ form_row(relativeForm.birthdate) }}
+		{# TODO : mettre dans une div et ajouter bouton add #}
+	    {{ form_label(relativeForm.home) }}
+	    {{ form_widget(relativeForm.home) }}
 	    <input type="submit" value="Valider" class="btn btn-primary">
 	{{ form_end(relativeForm) }}
 

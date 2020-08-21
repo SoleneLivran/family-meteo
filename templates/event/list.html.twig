@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="d-flex flex-row justify-content-between">
+    <h2>Prochains anniversaires</h2>
+</div>
+
+<ul class="list-group">
+{% for birthday in birthdays %}
+        <li class="list-group-item list-group-item-action">
+            {{ birthday|date("d/m") }}
+        </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

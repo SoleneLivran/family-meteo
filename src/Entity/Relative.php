@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RelativeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=RelativeRepository::class)
@@ -66,12 +67,12 @@ class Relative
         return $this;
     }
 
-    public function getBirthdate(): ?int
+    public function getBirthdate(): ?DateTime
     {
         return $this->birthdate;
     }
 
-    public function setBirthdate(?int $birthdate): self
+    public function setBirthdate(?DateTime $birthdate): self
     {
         $this->birthdate = $birthdate;
 

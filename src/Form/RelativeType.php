@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Home;
 use App\Entity\Relative;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,15 +31,26 @@ class RelativeType extends AbstractType
             ]
         );
 
-        // $builder->add(
-        //     'birthdate',
-        //     DateType::class,
-        //     [
-        //         "label" => "Date de naissance",
-        //         "required" => false,
-        //         "widget" => "single_text"
-        //     ]
-        // );
+        $builder->add(
+            'birthdate',
+            DateType::class,
+            [
+                "label" => "Date de naissance",
+                "required" => false,
+                "widget" => "single_text"
+            ]
+        );
+
+        $builder->add(
+            "home",
+            EntityType::class,
+            [
+                "label" => "Foyer",
+                "class" => Home::class,
+                "choice_label" => "name",
+                "required" => false,
+            ]
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
