@@ -91,31 +91,28 @@ class Relative
         return $this;
     }
 
-    public function getNextBirthday() : ?string
+    public function getNextBirthday() : ?DateTime
     {
         if ($this->birthdate === null) {
             return null;
         }
 
-        // var_dump($this->birthdate);die;
-        // get birthdate
-        $birthday = new DateTime($this->birthdate->format('Y-m-d'));
-        // 1993-02-18
+        // creates a new birthday object
+        $birthday = new DateTime();
 
-        $currentYear = date('Y');
-        // 2020
-
-        // put date in current year
-        $birthday->modify('+' . $currentYear - $birthday->format('Y') . ' years');
-        // +2020-1993
-        // +27 years
-        // 2020-02-18
-
-        // compare date with today's date
+        // in this new birthay : day and month of birthdate and current year
+        $birthday->setDate(
+            date('Y'),
+            $this->birthdate->format('m'),
+            $this->birthdate->format('d')
+        );
+        $birthday->setTime(0, 0, 0);
+        
+        // if birthday is in the past (before today), set it to the next year
         if($birthday < new DateTime()) {
             $birthday->modify('+1 year');
         }
 
-        return $birthday->format('Y-m-d');
+        return $birthday;
     }
 }

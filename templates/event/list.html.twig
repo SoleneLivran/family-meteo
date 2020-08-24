@@ -2,19 +2,17 @@
 
 {% block body %}
 
-<p>En cours de developpement ;)</p>
-
 <div class="d-flex flex-row justify-content-between">
     <h2>Prochains anniversaires</h2>
 </div>
 
-{# <ul class="list-group">
-{% for birthday in birthdays %}
+<ul class="list-group">
+{% for relative in relatives %}
         <li class="list-group-item list-group-item-action">
-            {{ birthday|date("d/m") }}
+            {{ relative.nextBirthday|date("d/m") }} {{ relative.firstname }}
         </li>
 {% endfor %}
-</ul> #}
+</ul>
 
 
 
