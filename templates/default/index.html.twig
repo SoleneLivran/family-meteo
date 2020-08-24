@@ -69,7 +69,9 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                                 <div class="card m-3" style="width: 18rem;">
                                     <div class="card-body">
                                         <div class="card-title flex">
+                                            {% if home.relatives is not empty %}
                                             <h5>
+                                                
                                                 Chez
                                                     {% for relative in home.relatives %}
                                                         {% if not loop.first %}
@@ -80,6 +82,7 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                                                         </a>
                                                     {% endfor %}
                                             </h5>
+                                            {% endif %}
                                             <ph6>À {{ home.cityName }}</ph6>
                                         </div>
                                         <img class="card-img-top mb-3" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" alt="{{ meteo.current.weather[0].description }}"/>
