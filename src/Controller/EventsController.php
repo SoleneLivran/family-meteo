@@ -15,17 +15,28 @@ class EventsController extends AbstractController
         /** @var RelativeRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Relative::class);
         $relatives = $repository->findAll();
-        $birthdays = [];
 
         foreach ($relatives as $relative) {
-            $birthday = $relative->getBirthdate();
-            $birthdays[$relative->getId()] = $birthday;
+            $nextBirthday = $relative->getNextBirthday();
         }
+
         
+        // usort($relatives, function (Relative $a, Relative $b) {
+
+        //     $aBirthday = $a->getBirthdate()->getMonth();
+        //     $bBirthday = $b->getBirthdate()->getMonth();
+
+        //     if ($aBirthday == $bBirthday) {
+        //         return 0;
+        //     }
+
+        //     return ($aBirthday < $bBirthday) ? -1 : 1;
+        // })
+
         return $this->render(
             'event/list.html.twig',
             [
-                "birthdays" => $birthdays,
+                "relatives" => $relatives,
             ]
         );
     }

@@ -90,4 +90,32 @@ class Relative
 
         return $this;
     }
+
+    public function getNextBirthday() : ?string
+    {
+        if ($this->birthdate === null) {
+            return null;
+        }
+
+        // var_dump($this->birthdate);die;
+        // get birthdate
+        $birthday = new DateTime($this->birthdate->format('Y-m-d'));
+        // 1993-02-18
+
+        $currentYear = date('Y');
+        // 2020
+
+        // put date in current year
+        $birthday->modify('+' . $currentYear - $birthday->format('Y') . ' years');
+        // +2020-1993
+        // +27 years
+        // 2020-02-18
+
+        // compare date with today's date
+        if($birthday < new DateTime()) {
+            $birthday->modify('+1 year');
+        }
+
+        return $birthday->format('Y-m-d');
+    }
 }
