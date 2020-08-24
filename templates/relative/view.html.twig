@@ -9,9 +9,29 @@
     </div>
 </div>
 
-<p>&#127968; Vit a {{ relative.getHome().cityName }}, {{ relative.getHome().postCode }}</p>
+{% if relative.home is not null %}
+<p>&#127968; Habite a {{ relative.getHome().cityName }}, {{ relative.getHome().postCode }}</p>
+
+<div class="d-flex flex-row justify-content-left">
+    {% if relative.getHome().getRelatives()|length() > 1 %}
+        <p class="mr-2">Avec 
+            {% for homeRelative in relative.getHome().getRelatives() %}
+                {% if not loop.first %}
+                et
+                {% endif %}
+                {# TODO {% if homeRelative is not same as relative %} #}
+                    {{ homeRelative.firstname }}
+                {# {% endif %} #}
+            {% endfor %}
+        </p>
+    {% endif %}
+    <p>(foyer "{{ relative.getHome().name }}")
+    {% endif %}</p>
+</div>
+
 {% if relative.birthdate is not null %}
 <p>&#128197; Date de naissance : {{ relative.birthdate|date("d\\/m\\/Y") }}</p>
+<p>&#8986; Âge : {{ relative.age }} ans</p>
 {% endif %}
 
 
