@@ -91,7 +91,7 @@ class Relative
         return $this;
     }
 
-    public function getNextBirthday() : ?DateTime
+    public function getNextBirthday(): ?DateTime
     {
         if ($this->birthdate === null) {
             return null;
@@ -114,5 +114,18 @@ class Relative
         }
 
         return $birthday;
+    }
+
+    public function getAge(): ?int
+    {
+        if ($this->birthdate === null) {
+            return null;
+        }
+
+        $today = new DateTime();
+
+        $interval = $this->birthdate->diff($today);
+        return $interval->y;
+
     }
 }
