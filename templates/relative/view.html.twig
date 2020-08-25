@@ -14,14 +14,14 @@
 
 <div class="d-flex flex-row justify-content-left">
     {% if relative.getHome().getRelatives()|length() > 1 %}
-        <p class="mr-2">Avec 
+        <p class="mr-2">Avec
             {% for homeRelative in relative.getHome().getRelatives() %}
-                {% if not loop.first %}
-                et
+                {% if homeRelative.id is not same as(relative.id) %}
+                    &#128522; {{ homeRelative.firstname }}
+                    {# TODO {% if not loop.last %}
+                    et
+                    {% endif %} #}
                 {% endif %}
-                {# TODO {% if homeRelative is not same as relative %} #}
-                    {{ homeRelative.firstname }}
-                {# {% endif %} #}
             {% endfor %}
         </p>
     {% endif %}
