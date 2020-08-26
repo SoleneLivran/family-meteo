@@ -45,7 +45,7 @@ class RelativeType extends AbstractType
             "home",
             EntityType::class,
             [
-                "label" => "Foyer",
+                "label" => "Foyer : choisir dans la liste ci-dessous, ou ",
                 "class" => Home::class,
                 "choice_label" => "name",
                 "required" => false,
