@@ -96,10 +96,28 @@ class RelativeController extends AbstractController
         }
 
         return $this->render(
-            'relative/add.html.twig',
+            'relative/update.html.twig',
             [
-                "relativeForm" => $relativeForm->createView()
+                "relativeForm" => $relativeForm->createView(),
+                "relative" => $relative,
             ]
         );
+    }
+
+    /**
+     * @Route("relatives/{id}/delete", name="relative_delete", requirements={"id"="\d+"})
+     */
+    public function delete(Relative $relative, $id)
+    {
+        /** @var RelativeRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Relative::class);
+        $relative = $repository->find($id);
+        
+        $manager = $this->getDoctrine()->getManager(); 
+        $manager->remove($relative);
+        $manager->flush();
+        
+        $this->addFlash("success", "Le proche a été supprimé de la liste");
+        return $this->redirectToRoute('relative_list');
     }
 }

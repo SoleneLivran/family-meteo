@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h2>Ajouter un proche à la liste </h2>
+
+<div class="d-flex flex-row justify-content-between">
+    <h2>Modifier les informations de {{ relative.firstname }} </h2>
+
+    <div>
+        <a onClick="return confirm('Confirmez la suppression');" href="{{ path('relative_delete', {'id': relative.id}) }}" class="btn btn-danger">Supprimer</a>
+    </div>
+</div>
 
 	{{ form_start(relativeForm) }}
 	    {{ form_row(relativeForm.firstname) }}
@@ -10,7 +17,7 @@
 	    <div class="d-flex flex-row justify-content-between">
 	    	{{ form_label(relativeForm.home) }}
 			<div>
-				<a href="{{ path('home_add') }}" class="btn btn-primary p-1 mb-2">Créer un nouveau foyer</a>
+				<a href="{{ path('home_add') }}" class="btn btn-primary p-1 mb-2">Ajouter</a>
 			</div>
 	    </div>
 	    {{ form_widget(relativeForm.home) }}
