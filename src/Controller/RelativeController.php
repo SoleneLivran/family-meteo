@@ -117,7 +117,7 @@ class RelativeController extends AbstractController
         $manager->remove($relative);
         $manager->flush();
         
-        $this->addFlash("success", "Le proche a été supprimé de la liste");
+        $this->addFlash("success", "Supprimé de la liste");
         return $this->redirectToRoute('relative_list');
     }
 }
