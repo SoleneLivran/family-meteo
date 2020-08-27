@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="d-flex flex-row justify-content-between">
+    <h2>Modifier les informations du foyer "{{ home.name }}" </h2>
+
+    <div>
+        <a onClick="return confirm('Confirmez la suppression');" href="#" class="btn btn-danger">Supprimer</a>
+    </div>
+</div>
+
+	{{ form_start(homeForm) }}
+	    {{ form_widget(homeForm) }}
+	    <input type="submit" value="Valider" class="btn btn-primary mt-3">
+		{# TODO : add button to return to previous page #}
+	{{ form_end(homeForm) }}
+
+{% endblock %}
