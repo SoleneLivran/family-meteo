@@ -68,7 +68,7 @@ class HomeController extends AbstractController
         $homeForm = $this->createForm(HomeType::class, $home);
         $homeForm->handleRequest($request);
         if($homeForm->isSubmitted() && $homeForm->isValid()) {
-            $coordinates = $this->addressCoordinatesFinder->getLatitudeAndLongitude($home->getCityName(), $home->getPostCode());
+            $coordinates = $this->addressCoordinatesFinder->getLatitudeAndLongitude($home->getCityName(), $home->getPostCode(), $home->getCountry());
 
             $latitude = $coordinates[0]['lat'];
             $home->setLatitude($latitude);

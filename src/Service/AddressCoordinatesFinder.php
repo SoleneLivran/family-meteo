@@ -13,7 +13,7 @@ class AddressCoordinatesFinder
         $this->apiKey = $apiKey;
     }
 
-    public function getLatitudeAndLongitude($city, $postalcode)
+    public function getLatitudeAndLongitude($city, $postalcode, $country)
     {   
         $client = new Client(['base_uri' => 'https://eu1.locationiq.com']);
         $res = $client->request('GET', '/v1/search.php', [
@@ -21,6 +21,7 @@ class AddressCoordinatesFinder
                 'key' => $this->apiKey,
                 'city' => $city,
                 'postalcode' => $postalcode,
+                'country' => $country,
                 'format' => 'json'
             ],
         ]);
