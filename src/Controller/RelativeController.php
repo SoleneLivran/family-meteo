@@ -88,7 +88,6 @@ class RelativeController extends AbstractController
         if($relativeForm->isSubmitted() && $relativeForm->isValid()) {
 
             $manager = $this->getDoctrine()->getManager();
-            $manager->persist($relative);
             $manager->flush();
 
             $this->addFlash("success", "Le proche a bien été modifié");

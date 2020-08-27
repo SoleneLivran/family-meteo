@@ -97,11 +97,12 @@ class HomeController extends AbstractController
             // ------------------------------
 
             // $request->getSession()->set('referer', $request->headers->get('referer'));
-            // if ($request->getSession()->get('referer')) {
-            //     return $this->redirect($request->getSession()->get('referer'));
+            // recup id du dernier user edite via la session
+            // if ($request->headers->has('referer')) {
+            //     return $this->redirect($request->headers->get('referer'));
             // }
 
-            // return $this->redirectToRoute("relative_list");
+            // return $this->redirectToRoute("relative_add");
 
             // ------------------------------
 
@@ -116,4 +117,36 @@ class HomeController extends AbstractController
             ]
         );
     }
+
+
+
+    /**
+     * @Route("home/{id}/update", name="home_update", requirements={"id"="\d+"})
+     */
+    public function update(Home $home, $id, Request $request)
+    {
+        /** @var HomeRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Home::class);
+        $home = $repository->find($id);
+
+        $homeForm = $this->createForm(HomeType::class, $home);
+        $homeForm->handleRequest($request);
+        if($homeForm->isSubmitted() && $homeForm->isValid()) {
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->flush();
+
+            $this->addFlash("success", "Le foyer a bien été modifié");
+            return $this->redirectToRoute("home_list");
+        }
+
+        return $this->render(
+            'home/update.html.twig',
+            [
+                "homeForm" => $homeForm->createView(),
+                "home" => $home,
+            ]
+        );
+    }
+
 }

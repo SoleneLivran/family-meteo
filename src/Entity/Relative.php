@@ -35,6 +35,7 @@ class Relative
 
     /**
      * @ORM\ManyToOne(targetEntity=Home::class, inversedBy="relatives")
+     * @ORM\JoinColumn(name="home_id", referencedColumnName="id",  onDelete="SET NULL")
      */
     private $home;
 
@@ -128,4 +129,10 @@ class Relative
         return $interval->y;
 
     }
+
+    public function getFullName()
+    {
+        return $this->firstname . " " . $this->lastname;
+    }
+
 }

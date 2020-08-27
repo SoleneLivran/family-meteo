@@ -46,6 +46,22 @@ class HomeType extends AbstractType
                 "label" => "Pays",
             ]
         );
+
+        $builder->add(
+            "relatives",
+            EntityType::class,
+            [
+                "label" => "Selectionner les membres du foyer :",
+                "class" => Relative::class,
+                "choice_label" => function ($relative) {
+                    return $relative->getFullName();
+                },
+                "multiple" => true,
+                "expanded" => true,
+            ]
+            // ! ne s'enregistre pas...
+            // ! ne mettre que les proches sans foyer
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

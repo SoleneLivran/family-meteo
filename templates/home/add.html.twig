@@ -2,10 +2,12 @@
 
 {% block body %}
 
-	{{ form_start(homeForm) }}
-	    {{ form_widget(homeForm) }}
-	    <input type="submit" value="Valider" class="btn btn-primary mt-3">
-		{# TODO : add button return to previous page #}
-	{{ form_end(homeForm) }}
+<h2>Ajouter un foyer à la liste </h2>
+
+{{ form_start(homeForm) }}
+	{{ form_widget(homeForm) }}
+	<input type="submit" value="Valider" class="btn btn-primary mt-3">
+	{# TODO : add button return to previous page #}
+{{ form_end(homeForm) }}
 
 {% endblock %}

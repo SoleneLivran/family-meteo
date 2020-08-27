@@ -5,7 +5,7 @@
 <div class="d-flex flex-row justify-content-between">
     <h2>Foyer {{ home.name }}</h2>
     <div>
-        <a href="#" class="btn btn-primary">Modifier</a>
+        <a href="{{ path('home_update', {id: home.id}) }}" class="btn btn-primary">Modifier</a>
     </div>
 </div>
 
