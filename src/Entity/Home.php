@@ -40,11 +40,6 @@ class Home
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Relative::class, mappedBy="home")
-     */
-    private $relatives;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $cityName;
@@ -53,6 +48,11 @@ class Home
      * @ORM\Column(type="string", length=255)
      */
     private $country;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Relative::class, inversedBy="homes")
+     */
+    private $relatives;
 
     public function __construct()
     {
@@ -112,37 +112,6 @@ class Home
         return $this;
     }
 
-    /**
-     * @return Collection|Relative[]
-     */
-    public function getRelatives(): Collection
-    {
-        return $this->relatives;
-    }
-
-    public function addRelative(Relative $relative): self
-    {
-        if (!$this->relatives->contains($relative)) {
-            $this->relatives[] = $relative;
-            $relative->setHome($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRelative(Relative $relative): self
-    {
-        if ($this->relatives->contains($relative)) {
-            $this->relatives->removeElement($relative);
-            // set the owning side to null (unless already changed)
-            if ($relative->getHome() === $this) {
-                $relative->setHome(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getCityName(): ?string
     {
         return $this->cityName;
@@ -163,6 +132,35 @@ class Home
     public function setCountry(string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Relative[]
+     */
+    public function getRelatives(): Collection
+    {
+        return $this->relatives;
+    }
+
+    public function addRelative(Relative $relative): self
+    {
+        // die('ADD RELATIVE');
+        if (!$this->relatives->contains($relative)) {
+            $this->relatives[] = $relative;
+            $relative->addHome($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelative(Relative $relative): self
+    {
+        if ($this->relatives->contains($relative)) {
+            $this->relatives->removeElement($relative);
+            $relative->removeHome($this);
+        }
 
         return $this;
     }

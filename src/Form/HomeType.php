@@ -51,7 +51,7 @@ class HomeType extends AbstractType
             "relatives",
             EntityType::class,
             [
-                "label" => "Selectionner les membres du foyer :",
+                "label" => "Selectionner les membres du foyer, ou",
                 "class" => Relative::class,
                 "choice_label" => function ($relative) {
                     return $relative->getFullName();
@@ -59,8 +59,6 @@ class HomeType extends AbstractType
                 "multiple" => true,
                 "expanded" => true,
             ]
-            // ! ne s'enregistre pas...
-            // ! ne mettre que les proches sans foyer
         );
     }
 

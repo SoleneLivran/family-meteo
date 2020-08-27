@@ -42,13 +42,15 @@ class RelativeType extends AbstractType
         );
 
         $builder->add(
-            "home",
+            "homes",
             EntityType::class,
             [
+                "by_reference" => false, // to be able to write on the non-owner side of the relationship
                 "label" => "Foyer : choisir dans la liste ci-dessous, ou ",
                 "class" => Home::class,
                 "choice_label" => "name",
-                "required" => false,
+                "multiple" => true,
+                "expanded" => true,
             ]
         );
     }

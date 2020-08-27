@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RelativeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -34,10 +36,14 @@ class Relative
     private $birthdate;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Home::class, inversedBy="relatives")
-     * @ORM\JoinColumn(name="home_id", referencedColumnName="id",  onDelete="SET NULL")
+     * @ORM\ManyToMany(targetEntity=Home::class, mappedBy="relatives")
      */
-    private $home;
+    private $homes;
+
+    public function __construct()
+    {
+        $this->homes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,18 +82,6 @@ class Relative
     public function setBirthdate(?DateTime $birthdate): self
     {
         $this->birthdate = $birthdate;
-
-        return $this;
-    }
-
-    public function getHome(): ?Home
-    {
-        return $this->home;
-    }
-
-    public function setHome(?Home $home): self
-    {
-        $this->home = $home;
 
         return $this;
     }
@@ -133,6 +127,34 @@ class Relative
     public function getFullName()
     {
         return $this->firstname . " " . $this->lastname;
+    }
+
+    /**
+     * @return Collection|Home[]
+     */
+    public function getHomes(): Collection
+    {
+        return $this->homes;
+    }
+
+    public function addHome(Home $home): self
+    {
+        // die('ADD_HOME');
+        if (!$this->homes->contains($home)) {
+            $this->homes[] = $home;
+            $home->addRelative($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHome(Home $home): self
+    {
+        if ($this->homes->contains($home)) {
+            $this->homes->removeElement($home);
+        }
+
+        return $this;
     }
 
 }
