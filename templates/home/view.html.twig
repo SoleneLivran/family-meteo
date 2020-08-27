@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="d-flex flex-row justify-content-between">
+    <h2>Foyer {{ home.name }}</h2>
+    <div>
+        <a href="#" class="btn btn-primary">Modifier</a>
+    </div>
+</div>
+
+{% if home.getRelatives() is not empty %}
+    <p>Membres du foyer :
+    {% for relative in home.getRelatives() %}
+        {% if not loop.first %}
+        & 
+        {% endif %}
+        {{ relative.firstname }}
+    {% endfor %}
+{% endif %}
+</p>
+
+<p>{{ home.cityName }} ({{ home.postCode }})</p>
+
+
+{% endblock %}

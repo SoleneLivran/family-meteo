@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="d-flex flex-row justify-content-between">
+    <h2>Liste des foyers</h2>
+    <div>
+        <a href="{{ path('home_add') }}" class="btn btn-primary">Ajouter</a>
+    </div>
+</div>
+
+<ul class="list-group">
+{% for home in homes %}
+        <li class="list-group-item list-group-item-action">
+            <a href="{{ path('home_view', {id: home.id}) }}">
+            Foyer {{ home.name }}
+            </a>
+            {% if home.getRelatives() is not empty %}
+                (
+                {% for relative in home.getRelatives() %}
+                    {% if not loop.first %}
+                    & 
+                    {% endif %}
+                    {{ relative.firstname }}
+                {% endfor %}
+                )
+            {% endif %}
+        </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

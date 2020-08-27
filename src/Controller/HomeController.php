@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Home;
 use App\Form\HomeType;
+use App\Repository\HomeRepository;
 use App\Service\AddressCoordinatesFinder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -20,6 +21,40 @@ class HomeController extends AbstractController
     public function __construct(AddressCoordinatesFinder $addressCoordinatesFinder)
     {
         $this->addressCoordinatesFinder = $addressCoordinatesFinder;
+    }
+
+    /**
+     * @Route("/homes", name="home_list")
+     */
+    public function list(Request $request, HomeRepository $repository)
+    {
+        /** @var HomeRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Home::class);
+        $homes = $repository->findAll();
+        
+        return $this->render(
+            'home/list.html.twig',
+            [
+                "homes" => $homes
+            ]
+        );
+    }
+
+    /**
+     * @Route("/homes/{id}", name="home_view", requirements={"id"="\d+"})
+     */
+    public function view($id)
+    {
+        /** @var HomeRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Home::class);
+        $home = $repository->find($id);
+        
+        return $this->render(
+            'home/view.html.twig',
+            [
+                "home" => $home
+            ]
+        );
     }
 
     /**
