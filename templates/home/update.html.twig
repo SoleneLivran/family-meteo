@@ -6,7 +6,7 @@
     <h2>Modifier les informations du foyer "{{ home.name }}" </h2>
 
     <div>
-        <a onClick="return confirm('Confirmez la suppression');" href="#" class="btn btn-danger">Supprimer</a>
+        <a onClick="return confirm('Confirmez la suppression');" href="{{ path('home_delete', {'id': home.id}) }}" class="btn btn-danger">Supprimer</a>
     </div>
 </div>
 

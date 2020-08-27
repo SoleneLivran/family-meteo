@@ -118,8 +118,6 @@ class HomeController extends AbstractController
         );
     }
 
-
-
     /**
      * @Route("home/{id}/update", name="home_update", requirements={"id"="\d+"})
      */
@@ -147,6 +145,23 @@ class HomeController extends AbstractController
                 "home" => $home,
             ]
         );
+    }
+
+    /**
+     * @Route("home/{id}/delete", name="home_delete", requirements={"id"="\d+"})
+     */
+    public function delete(Home $home, $id)
+    {
+        /** @var HomeRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Home::class);
+        $home = $repository->find($id);
+        
+        $manager = $this->getDoctrine()->getManager(); 
+        $manager->remove($home);
+        $manager->flush();
+        
+        $this->addFlash("success", "Supprimé de la liste");
+        return $this->redirectToRoute('home_list');
     }
 
 }
