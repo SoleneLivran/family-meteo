@@ -20,6 +20,7 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                 <hr>
                 {# <div class="col-12"> #}
                     <h3>À la maison</h3>
+                    {% if homes %}
                         {% for home in homes %}
                         {% set meteo = meteos[home.id] %}
                         {% set icon =  meteo.current.weather[0].icon %}
@@ -54,11 +55,15 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                             </div>
                             {% endif %}
                         {% endfor %}
+                    {% else %}
+                        <a href="#">Ajouter mon foyer</a>
+                    {% endif %}
                 {# </div> #}
                 {# <div class="col-12"> #}
                 <hr>
 
                     <h3>Chez les proches</h3>
+                    {% if homes %}
                         <div class="row">
                             {# CARTE PROCHE #}
                             {% for home in homes %}
@@ -107,8 +112,10 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                                 </div>
                                 {% endif %}
                             {% endfor %}
-
                         </div>
+                    {% else %}
+                        <a href="{{ path('home_add') }}">Ajouter des foyers</a>
+                    {% endif %}
                 {# </div> #}
             </div>
         </div>

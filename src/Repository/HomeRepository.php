@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Home;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,14 +20,22 @@ class HomeRepository extends ServiceEntityRepository
         parent::__construct($registry, Home::class);
     }
 
-    public function findAllByUser($userId)
+    public function queryAllByUser($userId): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('home');
 
         $queryBuilder->where(
             $queryBuilder->expr()->eq('home.createdBy', $userId)
         );
+
         $queryBuilder->addOrderBy('home.name', 'asc');
+
+        return $queryBuilder;
+    }
+
+    public function findAllByUser($userId)
+    {
+        $queryBuilder = $this->queryAllByUser($userId);
 
         $query = $queryBuilder->getQuery();
 
