@@ -15,7 +15,7 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h1>Bienvenue sur la météo des proches !</h1>
+                <h1>Bienvenue sur la météo des proches {% if app.user %} {{ app.user.username|capitalize }} {% endif %}!</h1>
                 <blockquote>{{ random(quote) }}</blockquote>
                 <hr>
                 {# <div class="col-12"> #}
