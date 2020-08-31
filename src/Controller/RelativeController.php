@@ -19,7 +19,7 @@ class RelativeController extends AbstractController
     {
         /** @var RelativeRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Relative::class);
-        $relatives = $repository->findAllOrderedByFirstName();
+        $relatives = $repository->findAllByUser($this->getUser()->getId());
         
         return $this->render(
             'relative/list.html.twig',

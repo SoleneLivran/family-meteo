@@ -20,13 +20,15 @@ class RelativeRepository extends ServiceEntityRepository
         parent::__construct($registry, Relative::class);
     }
 
-    public function findAllOrderedByFirstName()
+    public function findAllByUser($userId)
     {
         // je crée "l'usine" à requete
         $queryBuilder = $this->createQueryBuilder('relative');
 
-        // fabrique une requete personnalisée
-        $queryBuilder->orderBy('relative.firstname', 'asc');
+        $queryBuilder->where(
+            $queryBuilder->expr()->eq('relative.createdBy', $userId)
+        );
+        $queryBuilder->addOrderBy('relative.firstname', 'asc');
 
         // a la fin je recupère a la requete fabriquée
         $query = $queryBuilder->getQuery();

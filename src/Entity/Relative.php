@@ -40,6 +40,11 @@ class Relative
      */
     private $homes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="relatives")
+     */
+    private $createdBy;
+
     public function __construct()
     {
         $this->homes = new ArrayCollection();
@@ -153,6 +158,18 @@ class Relative
         if ($this->homes->contains($home)) {
             $this->homes->removeElement($home);
         }
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }

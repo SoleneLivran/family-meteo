@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,6 +37,22 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Relative::class, mappedBy="createdBy")
+     */
+    private $relatives;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Home::class, mappedBy="createdBy")
+     */
+    private $homes;
+
+    public function __construct()
+    {
+        $this->relatives = new ArrayCollection();
+        $this->homes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -107,5 +125,67 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Relative[]
+     */
+    public function getRelatives(): Collection
+    {
+        return $this->relatives;
+    }
+
+    public function addRelative(Relative $relative): self
+    {
+        if (!$this->relatives->contains($relative)) {
+            $this->relatives[] = $relative;
+            $relative->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelative(Relative $relative): self
+    {
+        if ($this->relatives->contains($relative)) {
+            $this->relatives->removeElement($relative);
+            // set the owning side to null (unless already changed)
+            if ($relative->getCreatedBy() === $this) {
+                $relative->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Home[]
+     */
+    public function getHomes(): Collection
+    {
+        return $this->homes;
+    }
+
+    public function addHome(Home $home): self
+    {
+        if (!$this->homes->contains($home)) {
+            $this->homes[] = $home;
+            $home->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHome(Home $home): self
+    {
+        if ($this->homes->contains($home)) {
+            $this->homes->removeElement($home);
+            // set the owning side to null (unless already changed)
+            if ($home->getCreatedBy() === $this) {
+                $home->setCreatedBy(null);
+            }
+        }
+
+        return $this;
     }
 }

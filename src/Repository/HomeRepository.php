@@ -19,6 +19,21 @@ class HomeRepository extends ServiceEntityRepository
         parent::__construct($registry, Home::class);
     }
 
+    public function findAllByUser($userId)
+    {
+        $queryBuilder = $this->createQueryBuilder('home');
+
+        $queryBuilder->where(
+            $queryBuilder->expr()->eq('home.createdBy', $userId)
+        );
+        $queryBuilder->addOrderBy('home.name', 'asc');
+
+        $query = $queryBuilder->getQuery();
+
+        // me renvoi UN seul resultat 
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Home[] Returns an array of Home objects
     //  */

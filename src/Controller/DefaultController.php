@@ -25,7 +25,7 @@ class DefaultController extends AbstractController
         // Get all homes
         /** @var HomeRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Home::class);
-        $homes = $repository->findAll();
+        $homes = $repository->findAllByUser($this->getUser()->getId());
         $meteos = [];
 
         foreach ($homes as $home) {

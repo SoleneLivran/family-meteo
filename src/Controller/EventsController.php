@@ -14,7 +14,7 @@ class EventsController extends AbstractController
     public function eventsCalendar() {
         /** @var RelativeRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Relative::class);
-        $relatives = $repository->findAll();
+        $relatives = $repository->findAllByUser($this->getUser()->getId());
 
         usort($relatives, function (Relative $a, Relative $b) {
             $aBirthday = $a->getNextBirthday();

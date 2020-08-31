@@ -30,7 +30,7 @@ class HomeController extends AbstractController
     {
         /** @var HomeRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Home::class);
-        $homes = $repository->findAll();
+        $homes = $repository->findAllByUser($this->getUser()->getId());
         
         return $this->render(
             'home/list.html.twig',
