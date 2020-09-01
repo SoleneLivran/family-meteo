@@ -58,6 +58,8 @@ class RelativeController extends AbstractController
         $relativeForm->handleRequest($request);
         if($relativeForm->isSubmitted() && $relativeForm->isValid()) {
 
+            $relative->setCreatedBy($this->getUser());
+
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($relative);
             $manager->flush();
