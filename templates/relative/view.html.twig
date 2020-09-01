@@ -18,7 +18,10 @@
             <p class="mr-2">Avec
                 {% for homeRelative in home.getRelatives() %}
                     {% if homeRelative.id is not same as(relative.id) %}
-                        &#128522; {{ homeRelative.firstname|capitalize }}
+                    &#128522;
+                    <a href="{{ path('relative_view', {id: homeRelative.id}) }}">
+                        {{ homeRelative.firstname|capitalize }}
+                    </a>
                         {# TODO {% if not loop.last %}
                         et
                         {% endif %} #}
