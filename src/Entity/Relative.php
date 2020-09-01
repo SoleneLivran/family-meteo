@@ -131,7 +131,7 @@ class Relative
 
     public function getFullName()
     {
-        return $this->firstname . " " . $this->lastname;
+        return ucfirst($this->firstname) . " " . ucfirst($this->lastname);
     }
 
     /**

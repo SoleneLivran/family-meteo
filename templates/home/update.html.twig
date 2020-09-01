@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="d-flex flex-row justify-content-between">
-    <h2>Modifier les informations du foyer "{{ home.name }}" </h2>
+    <h2>Modifier les informations du foyer "{{ home.name|capitalize }}" </h2>
 
     <div>
         <a onClick="return confirm('Confirmez la suppression');" href="{{ path('home_delete', {'id': home.id}) }}" class="btn btn-danger">Supprimer</a>

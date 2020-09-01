@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="d-flex flex-row justify-content-between">
-    <h2>Modifier les informations de {{ relative.firstname }} </h2>
+    <h2>Modifier les informations de {{ relative.getFullName() }} </h2>
 
     <div>
         <a onClick="return confirm('Confirmez la suppression');" href="{{ path('relative_delete', {'id': relative.id}) }}" class="btn btn-danger">Supprimer</a>

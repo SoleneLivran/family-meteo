@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="d-flex flex-row justify-content-between">
-    <h2>Foyer {{ home.name }}</h2>
+    <h2>Foyer {{ home.name|capitalize }}</h2>
     <div>
         <a href="{{ path('home_update', {id: home.id}) }}" class="btn btn-primary">Modifier</a>
     </div>
@@ -15,7 +15,7 @@
         {% if not loop.first %}
         & 
         {% endif %}
-        {{ relative.firstname }}
+        {{ relative.firstname|capitalize }}
     {% endfor %}
 {% endif %}
 </p>

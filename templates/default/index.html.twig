@@ -29,7 +29,7 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                                 <img class="mr-5" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" width="30%" alt="meteo"/>
                                 <div>
                                     {% if userHomes|length > 1 %}
-                                    <p>Foyer {{ home.name }}</p>
+                                    <p>Foyer {{ home.name|capitalize }}</p>
                                     {% endif %}
                                     <p>
                                         <img src="{{ asset('images/weathericons/temperature.png') }}" width="40px" alt="Temperature"/>
@@ -81,7 +81,7 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                                                         et
                                                         {% endif %}
                                                         <a href="{{ path('relative_view', {id: relative.id}) }}">
-                                                        {{ relative.firstname }}
+                                                        {{ relative.firstname|capitalize }}
                                                         </a>
                                                     {% endfor %}
                                             </h5>

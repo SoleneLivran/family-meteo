@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="d-flex flex-row justify-content-between">
-    <h2>{{ relative.firstname }} {{ relative.lastname }}</h2>
+    <h2>{{ relative.getFullName() }}</h2>
     <div>
         <a href="{{ path('relative_update', {'id': relative.id}) }}" class="btn btn-primary">Modifier</a>
     </div>
@@ -18,14 +18,14 @@
             <p class="mr-2">Avec
                 {% for homeRelative in home.getRelatives() %}
                     {% if homeRelative.id is not same as(relative.id) %}
-                        &#128522; {{ homeRelative.firstname }}
+                        &#128522; {{ homeRelative.firstname|capitalize }}
                         {# TODO {% if not loop.last %}
                         et
                         {% endif %} #}
                     {% endif %}
                 {% endfor %}
             </p>
-        <p>(foyer "{{ home.name }}")
+        <p>(foyer "{{ home.name|capitalize }}")
         {% endif %}</p>
     </div>
 {% endfor %}

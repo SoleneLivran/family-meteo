@@ -10,7 +10,7 @@
 <ul class="list-group">
 {% for relative in relatives %}
         <li class="list-group-item list-group-item-action">
-            {{ relative.nextBirthday|date("d/m") }} : {{ relative.firstname }} ({{ relative.age + 1 }} {{ relative.age ? 'ans' : 'an' }})
+            {{ relative.nextBirthday|date("d/m") }} : {{ relative.firstname|capitalize }} ({{ relative.age + 1 }} {{ relative.age ? 'ans' : 'an' }})
         </li>
 {% endfor %}
 </ul>

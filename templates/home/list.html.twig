@@ -15,7 +15,7 @@
 {% for home in homes %}
         <li class="list-group-item list-group-item-action">
             <a href="{{ path('home_view', {id: home.id}) }}">
-            Foyer {{ home.name }}
+            Foyer {{ home.name|capitalize }}
             </a>
             {% if home.getRelatives() is not empty %}
                 (
@@ -23,7 +23,7 @@
                     {% if not loop.first %}
                     & 
                     {% endif %}
-                    {{ relative.firstname }}
+                    {{ relative.firstname|capitalize }}
                 {% endfor %}
                 )
             {% endif %}
