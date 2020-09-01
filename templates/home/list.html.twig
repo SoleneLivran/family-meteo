@@ -2,6 +2,8 @@
 
 {% block body %}
 
+
+{% if homes is not empty %}
 <div class="d-flex flex-row justify-content-between">
     <h2>Liste des foyers</h2>
     <div>
@@ -28,5 +30,11 @@
         </li>
 {% endfor %}
 </ul>
+
+{% else %}
+<h2>Liste des foyers</h2>
+<p>Aucun foyer créé pour le moment !</p>
+<a href="{{ path('home_add') }}" class="btn btn-primary">Ajouter des foyers</a>
+{% endif %}
 
 {% endblock %}
