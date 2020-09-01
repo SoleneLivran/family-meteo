@@ -65,6 +65,11 @@ class RelativeController extends AbstractController
             $manager->flush();
 
             $this->addFlash("success", "Le proche a bien été ajouté");
+
+            if ($request->query->has('redirectTo')) {
+                return $this->redirect($request->query->get('redirectTo'));
+            }
+
             return $this->redirectToRoute("relative_list");
         }
 
@@ -93,6 +98,11 @@ class RelativeController extends AbstractController
             $manager->flush();
 
             $this->addFlash("success", "Le proche a bien été modifié");
+
+            if ($request->query->has('redirectTo')) {
+                return $this->redirect($request->query->get('redirectTo'));
+            }
+
             return $this->redirectToRoute("relative_list");
         }
 

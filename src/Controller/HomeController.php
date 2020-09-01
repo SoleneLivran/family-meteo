@@ -83,6 +83,11 @@ class HomeController extends AbstractController
             $manager->flush();
 
             $this->addFlash("success", "Le foyer a bien été ajouté");
+
+            if ($request->query->has('redirectTo')) {
+                return $this->redirect($request->query->get('redirectTo'));
+            }
+
             return $this->redirectToRoute("relative_add");
 
             // TODO redirect to previous page
@@ -137,6 +142,11 @@ class HomeController extends AbstractController
             $manager->flush();
 
             $this->addFlash("success", "Le foyer a bien été modifié");
+
+            if ($request->query->has('redirectTo')) {
+                return $this->redirect($request->query->get('redirectTo'));
+            }
+            
             return $this->redirectToRoute("home_list");
         }
 
