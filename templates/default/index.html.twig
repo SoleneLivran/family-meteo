@@ -18,11 +18,9 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                 <h1>Bienvenue sur la météo des proches {% if app.user %} {{ app.user.username|capitalize }} {% endif %}!</h1>
                 <blockquote>{{ random(quote) }}</blockquote>
                 <hr>
-                {# <div class="col-12"> #}
                     <h3>À la maison</h3> 
-                    {% dump app.user.userHomes.toArray %}
-                    {% if app.user.userHomes is not empty %}
-                        {% for home in app.user.userHomes %}
+                    {% if userHomes is not empty %}
+                        {% for home in userHomes %}
                         {% set meteo = meteos[home.id] %}
                         {% set icon =  meteo.current.weather[0].icon %}
                         {% set windInKmh = 3.114 %}
@@ -30,7 +28,7 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                             <div class="d-flex flex-row justify-content-left align-items-sm-center">
                                 <img class="mr-5" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" width="30%" alt="meteo"/>
                                 <div>
-                                    {% if app.user.userHomes.toArray|length > 1 %}
+                                    {% if userHomes|length > 1 %}
                                     <p>Foyer {{ home.name }}</p>
                                     {% endif %}
                                     <p>
@@ -60,15 +58,13 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                     {% else %}
                         <a href="#">Ajouter mon foyer</a>
                     {% endif %}
-                {# </div> #}
-                {# <div class="col-12"> #}
                 <hr>
 
                     <h3>Chez les proches</h3>
-                    {% if homes %}
+                    {% if relativesHomes is not empty %}
                         <div class="row">
                             {# CARTE PROCHE #}
-                            {% for home in homes %}
+                            {% for home in relativesHomes %}
                             {% set meteo = meteos[home.id] %}
                             {% set icon =  meteo.current.weather[0].icon %}
                             {% set windInKmh = 3.114 %}

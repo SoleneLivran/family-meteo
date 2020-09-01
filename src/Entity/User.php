@@ -48,11 +48,6 @@ class User implements UserInterface
      */
     private $homes;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Home::class, mappedBy="user")
-     */
-    private $userHomes;
-
     public function __construct()
     {
         $this->relatives = new ArrayCollection();
@@ -189,37 +184,6 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($home->getCreatedBy() === $this) {
                 $home->setCreatedBy(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Home[]
-     */
-    public function getUserHomes(): Collection
-    {
-        return $this->userHomes;
-    }
-
-    public function addUserHome(Home $userHome): self
-    {
-        if (!$this->userHomes->contains($userHome)) {
-            $this->userHomes[] = $userHome;
-            $userHome->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserHome(Home $userHome): self
-    {
-        if ($this->userHomes->contains($userHome)) {
-            $this->userHomes->removeElement($userHome);
-            // set the owning side to null (unless already changed)
-            if ($userHome->getUser() === $this) {
-                $userHome->setUser(null);
             }
         }
 

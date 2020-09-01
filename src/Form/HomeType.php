@@ -7,6 +7,7 @@ use App\Entity\Relative;
 use App\Repository\RelativeRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -70,6 +71,15 @@ class HomeType extends AbstractType
                 },
                 "multiple" => true,
                 "expanded" => true,
+            ]
+        );
+
+        $builder->add(
+            "isUserHome",
+            CheckboxType::class,
+            [
+            'label' => "Il s'agit de mon foyer",
+            'required' => false,
             ]
         );
     }

@@ -76,6 +76,8 @@ class HomeController extends AbstractController
             $longitude = $coordinates[0]['lon'];
             $home->setLongitude($longitude);
 
+            $home->setCreatedBy($this->getUser());
+
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($home);
             $manager->flush();

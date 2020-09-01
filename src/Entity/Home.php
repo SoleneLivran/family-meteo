@@ -60,9 +60,9 @@ class Home
     private $createdBy;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="userHomes")
+     * @ORM\Column(type="boolean", options={"default" : false})
      */
-    private $user;
+    private $isUserHome = false;
 
     public function __construct()
     {
@@ -187,14 +187,14 @@ class Home
         return $this;
     }
 
-    public function getUser(): ?User
+    public function isUserHome(): ?bool
     {
-        return $this->user;
+        return $this->isUserHome;
     }
 
-    public function setUser(?User $user): self
+    public function setIsUserHome(bool $isUserHome): self
     {
-        $this->user = $user;
+        $this->isUserHome = $isUserHome;
 
         return $this;
     }

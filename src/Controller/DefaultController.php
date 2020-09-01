@@ -22,13 +22,18 @@ class DefaultController extends AbstractController
      */
     public function homepage()
     {
-        // Get user
-        // $user = $this->getUser();
-
         // Get all homes
         /** @var HomeRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Home::class);
         $homes = $repository->findAllByUser($this->getUser()->getId());
+
+        $userHomes = array_filter($homes, function(Home $home) {
+            return $home->isUserHome();
+        });
+        $relativesHomes = array_filter($homes, function(Home $home) {
+            return !$home->isUserHome();
+        });
+
         $meteos = [];
 
         foreach ($homes as $home) {
@@ -39,8 +44,8 @@ class DefaultController extends AbstractController
         return $this->render(
             'default/index.html.twig',
             [
-                "homes" => $homes,
-                // "userHomes" => $user->getHomes(),
+                "relativesHomes" => $relativesHomes,
+                "userHomes" => $userHomes,
                 "meteos" => $meteos,
                 "quote" => QuoteModel::getQuote(),
             ]
