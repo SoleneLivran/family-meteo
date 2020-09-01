@@ -19,13 +19,13 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                 <blockquote>{{ random(quote) }}</blockquote>
                 <hr>
                 {# <div class="col-12"> #}
-                    <h3>À la maison</h3>
-                    {% if homes %}
-                        {% for home in homes %}
+                    <h3>À la maison</h3> 
+                    {# {% dump app.user.userHomes.toArray %} #}
+                    {% if app.user.userHomes is not empty %}
+                        {% for home in app.user.userHomes %}
                         {% set meteo = meteos[home.id] %}
                         {% set icon =  meteo.current.weather[0].icon %}
                         {% set windInKmh = 3.114 %}
-                            {% if home.name is same as ('Maison') %}
 
                             <div class="d-flex flex-row justify-content-left align-items-sm-center">
                                 <img class="mr-5" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" width="30%" alt="meteo"/>
@@ -53,7 +53,6 @@ https://www.flaticon.com/packs/weather-forecast?word=weather
                                     <img src="{{ asset('images/weathericons/' ~ meteo.daily[6].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
                                 </div>
                             </div>
-                            {% endif %}
                         {% endfor %}
                     {% else %}
                         <a href="#">Ajouter mon foyer</a>

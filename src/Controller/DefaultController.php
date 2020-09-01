@@ -22,6 +22,9 @@ class DefaultController extends AbstractController
      */
     public function homepage()
     {
+        // Get user
+        // $user = $this->getUser();
+
         // Get all homes
         /** @var HomeRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Home::class);
@@ -37,6 +40,7 @@ class DefaultController extends AbstractController
             'default/index.html.twig',
             [
                 "homes" => $homes,
+                // "userHomes" => $user->getHomes(),
                 "meteos" => $meteos,
                 "quote" => QuoteModel::getQuote(),
             ]

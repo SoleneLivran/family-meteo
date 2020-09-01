@@ -59,6 +59,11 @@ class Home
      */
     private $createdBy;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="userHomes")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->relatives = new ArrayCollection();
@@ -178,6 +183,18 @@ class Home
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
