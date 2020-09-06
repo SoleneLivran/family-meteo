@@ -1,0 +1,40 @@
+body {
+  background-image: url("../images/img/bg-img2.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.navbar {
+  background-color: rgb(88, 76, 161, 0.5);
+}
+
+.btn-primary {
+  background-color: rgb(88, 76, 161);
+}
+
+.navbar a,
+.navbar li {
+  color: white;
+}
+
+.navbar a:hover {
+  color: rgb(88, 76, 161);
+}
+
+.navbar .navbar-brand:hover {
+  color: white;
+}
+
+a {
+  color: rgb(88, 76, 161);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: rgb(151, 76, 161);
+}
+
+h1, h2, h3 {
+  color:white;
+}
