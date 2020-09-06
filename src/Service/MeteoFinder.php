@@ -4,30 +4,51 @@ namespace App\Service;
 
 use App\Entity\Home;
 use GuzzleHttp\Client;
+use GuzzleHttp\Promise;
 
 class MeteoFinder
 {
     private $apiKey;
 
+    /**
+     * Constructor
+     */
     public function __construct(string $apiKey)
     {
         $this->apiKey = $apiKey;
     }
 
-    public function getMeteoForHome(Home $home) : array
+    /**
+     * @param $homes Home[]
+     */
+    public function getMeteo(array $homes)
     {
         $client = new Client(['base_uri' => 'https://api.openweathermap.org']);
-        $res = $client->request('GET', '/data/2.5/onecall', [
-            'query' => [
-                'lat' => $home->getLatitude(),
-                'lon' => $home->getLongitude(),
-                'exclude' => 'minutely, hourly',
-                'units' => 'metric',
-                'lang' => 'fr',
-                'appid' => $this->apiKey,
-            ]
-        ]);
 
-        return json_decode($res->getBody(), true);
+        $promises = [];
+        $meteos = [];
+
+        foreach ($homes as $key => $home) {
+            $promises[$key] = $client->requestAsync('GET', '/data/2.5/onecall', [
+                'query' => [
+                    'lat' => $home->getLatitude(),
+                    'lon' => $home->getLongitude(),
+                    'exclude' => 'minutely, hourly',
+                    'units' => 'metric',
+                    'lang' => 'fr',
+                    'appid' => $this->apiKey,
+                ]
+            ]);
+        }
+
+        $responses = Promise\unwrap($promises);
+
+        foreach ($responses as $key => $response) {
+            $home = $homes[$key];
+            $meteo = json_decode($response->getBody(), true);
+            $meteos[$home->getId()] = $meteo;
+        }
+
+        return $meteos;
     }
 }

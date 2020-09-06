@@ -22,7 +22,7 @@ class DefaultController extends AbstractController
      */
     public function homepage()
     {
-        // Get all homes
+        // Get all homes for connected user
         /** @var HomeRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Home::class);
         $homes = $repository->findAllByUser($this->getUser()->getId());
@@ -34,12 +34,7 @@ class DefaultController extends AbstractController
             return !$home->isUserHome();
         });
 
-        $meteos = [];
-
-        foreach ($homes as $home) {
-            $meteo = $this->meteoFinder->getMeteoForHome($home);
-            $meteos[$home->getId()] = $meteo;
-        }
+        $meteos = $this->meteoFinder->getMeteo($homes);
         
         return $this->render(
             'default/index.html.twig',
