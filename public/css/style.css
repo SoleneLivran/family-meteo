@@ -38,3 +38,14 @@ a:hover {
 h1, h2, h3 {
   color:white;
 }
+
+.user-home-meteo,
+.card {
+  background-color: rgb(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 10px;
+}
+
+.user-home-meteo {
+  padding: 1em;
+}

@@ -8,45 +8,47 @@
                 <blockquote>{{ random(quote) }}</blockquote>
                 <hr>
                     <h3>À la maison</h3> 
-                    {% if userHomes is not empty %}
-                        {% for home in userHomes %}
-                        {% set meteo = meteos[home.id] %}
-                        {% set icon =  meteo.current.weather[0].icon %}
-                        {% set windInKmh = 3.114 %}
-
-                            <div class="d-flex flex-row justify-content-left align-items-sm-center">
-                                <img class="mr-5" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" width="30%" alt="meteo"/>
-                                <div>
-                                    {% if userHomes|length > 1 %}
-                                    <p>Foyer {{ home.name|capitalize }}</p>
-                                    {% endif %}
-                                    <p>
-                                        <img src="{{ asset('images/weathericons/temperature.png') }}" width="40px" alt="Temperature"/>
-                                            {{ meteo.current.temp|number_format }} °C
-                                    </p>
-                                    <p>
-                                        <img src="{{ asset('images/weathericons/sunrise.png') }}" width="40px" alt="Lever du soleil"/>
-                                            {{ meteo.daily[0].sunrise|date("H\\hi") }}
-                                        <img src="{{ asset('images/weathericons/sunset.png') }}" width="40px" alt="Coucher du soleil"/>
-                                            {{ meteo.daily[0].sunset|date("H\\hi") }}
-                                    </p>
-                                    <p>
-                                        <img src="{{ asset('images/weathericons/wind.png') }}" width="40px" alt="Vent"/>
-                                            {{ (meteo.daily[0].wind_speed)*windInKmh|round }} km/h
-                                    </p>
-                                    <p>Jours à venir :</p>
-                                    <img src="{{ asset('images/weathericons/' ~ meteo.daily[1].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
-                                    <img src="{{ asset('images/weathericons/' ~ meteo.daily[2].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
-                                    <img src="{{ asset('images/weathericons/' ~ meteo.daily[3].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
-                                    <img src="{{ asset('images/weathericons/' ~ meteo.daily[4].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
-                                    <img src="{{ asset('images/weathericons/' ~ meteo.daily[5].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
-                                    <img src="{{ asset('images/weathericons/' ~ meteo.daily[6].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+                    <div class="user-home-meteo">
+                        {% if userHomes is not empty %}
+                            {% for home in userHomes %}
+                            {% set meteo = meteos[home.id] %}
+                            {% set icon =  meteo.current.weather[0].icon %}
+                            {% set windInKmh = 3.114 %}
+    
+                                <div class="d-flex flex-row justify-content-left align-items-sm-center">
+                                    <img class="mr-5" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" width="30%" alt="meteo"/>
+                                    <div>
+                                        {% if userHomes|length > 1 %}
+                                        <p>Foyer {{ home.name|capitalize }}</p>
+                                        {% endif %}
+                                        <p>
+                                            <img src="{{ asset('images/weathericons/temperature.png') }}" width="40px" alt="Temperature"/>
+                                                {{ meteo.current.temp|number_format }} °C
+                                        </p>
+                                        <p>
+                                            <img src="{{ asset('images/weathericons/sunrise.png') }}" width="40px" alt="Lever du soleil"/>
+                                                {{ meteo.daily[0].sunrise|date("H\\hi") }}
+                                            <img src="{{ asset('images/weathericons/sunset.png') }}" width="40px" alt="Coucher du soleil"/>
+                                                {{ meteo.daily[0].sunset|date("H\\hi") }}
+                                        </p>
+                                        <p>
+                                            <img src="{{ asset('images/weathericons/wind.png') }}" width="40px" alt="Vent"/>
+                                                {{ (meteo.daily[0].wind_speed)*windInKmh|round }} km/h
+                                        </p>
+                                        <p>Jours à venir :</p>
+                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[1].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[2].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[3].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[4].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[5].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[6].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <a href="#">Ajouter mon foyer</a>
-                    {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <a href="#">Ajouter mon foyer</a>
+                        {% endif %}
+                    </div>
                 <hr>
 
                     <h3>Chez les proches</h3>
