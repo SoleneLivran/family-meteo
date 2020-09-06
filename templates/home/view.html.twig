@@ -15,7 +15,7 @@
         {% if not loop.first %}
         & 
         {% endif %}
-        {{ relative.firstname|capitalize }}
+        <a href="{{ path('relative_view', {id: relative.id}) }}">{{ relative.firstname|capitalize }}</a>
     {% endfor %}
 {% endif %}
 </p>

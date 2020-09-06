@@ -11,25 +11,32 @@
     </div>
 </div>
 
-<ul class="list-group">
+<div class="row">
 {% for home in homes %}
-        <li class="list-group-item list-group-item-action">
-            <a href="{{ path('home_view', {id: home.id}) }}">
-            Foyer {{ home.name|capitalize }}
-            </a>
+    <div class="card m-3" style="width: 18rem;">
+            <h4 class="card-header">
+                Foyer {{ home.name|capitalize }}
+                <a href="{{ path('home_update', {id: home.id}) }}"><i class="fas fa-edit float-right" style="font-size:0.7em"></i></a>
+            </h4>
+            <div class="card-body">
+            <p>À {{ home.cityName }} ({{ home.postCode }}, {{ home.country }})</p>
             {% if home.getRelatives() is not empty %}
-                (
-                {% for relative in home.getRelatives() %}
-                    {% if not loop.first %}
-                    & 
-                    {% endif %}
-                    {{ relative.firstname|capitalize }}
-                {% endfor %}
-                )
+            <h5>Membres du foyer :</h5>
+            <ul class="list-unstyled">
+            {% for relative in home.getRelatives() %}
+                <li>
+                <a href="{{ path('relative_view', {id: relative.id}) }}">{{ relative.getFullName }}</a>
+                </li>
+            {% endfor %}
+            </ul>
             {% endif %}
-        </li>
+            {# <div class="text-right">
+                <a href="{{ path('home_update', {id: home.id}) }}">Modifier ce foyer</a>
+            </div> #}
+        </div>
+    </div>
 {% endfor %}
-</ul>
+</div>
 
 {% else %}
 <h2>Liste des foyers</h2>

@@ -11,7 +11,7 @@
 
 {% if relative.homes is not null %}
 {% for home in relative.homes %}
-    <p>&#127968; Habite a {{ home.cityName }}, {{ home.postCode }}</p>
+    <p>&#127968; Habite à {{ home.cityName }}, {{ home.postCode }}</p>
 
     <div class="d-flex flex-row justify-content-left">
         {% if home.getRelatives()|length() > 1 %}
