@@ -43,12 +43,8 @@ class HomeController extends AbstractController
     /**
      * @Route("/homes/{id}", name="home_view", requirements={"id"="\d+"})
      */
-    public function view($id)
+    public function view(Home $home)
     {
-        /** @var HomeRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Home::class);
-        $home = $repository->find($id);
-        
         return $this->render(
             'home/view.html.twig',
             [
@@ -89,32 +85,6 @@ class HomeController extends AbstractController
             }
 
             return $this->redirectToRoute("relative_add");
-
-            // TODO redirect to previous page
-            // $url = $this->getTargetPath($request->getSession(), 'main');
-            // if (!$url) {
-            //     return $this->redirectToRoute("relative_list");
-            // }
-            // return new RedirectResponse($url);
-
-            // ? document.referrer() 
-            // ------------------------------
-            // ? window.history.back()
-
-            // ------------------------------
-
-            // $request->getSession()->set('referer', $request->headers->get('referer'));
-            // recup id du dernier user edite via la session
-            // if ($request->headers->has('referer')) {
-            //     return $this->redirect($request->headers->get('referer'));
-            // }
-
-            // return $this->redirectToRoute("relative_add");
-
-            // ------------------------------
-
-            // $referer = $this->getRequest()->headers->get('referer');
-            // return $this->redirect($referer);
         }
 
         return $this->render(
@@ -128,12 +98,8 @@ class HomeController extends AbstractController
     /**
      * @Route("home/{id}/update", name="home_update", requirements={"id"="\d+"})
      */
-    public function update(Home $home, $id, Request $request)
+    public function update(Home $home, Request $request)
     {
-        /** @var HomeRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Home::class);
-        $home = $repository->find($id);
-
         $homeForm = $this->createForm(HomeType::class, $home);
         $homeForm->handleRequest($request);
         if($homeForm->isSubmitted() && $homeForm->isValid()) {
@@ -162,12 +128,8 @@ class HomeController extends AbstractController
     /**
      * @Route("home/{id}/delete", name="home_delete", requirements={"id"="\d+"})
      */
-    public function delete(Home $home, $id)
+    public function delete(Home $home)
     {
-        /** @var HomeRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Home::class);
-        $home = $repository->find($id);
-        
         $manager = $this->getDoctrine()->getManager(); 
         $manager->remove($home);
         $manager->flush();

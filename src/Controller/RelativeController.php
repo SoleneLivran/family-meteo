@@ -32,12 +32,8 @@ class RelativeController extends AbstractController
     /**
      * @Route("/relatives/{id}", name="relative_view", requirements={"id"="\d+"})
      */
-    public function view($id)
+    public function view(Relative $relative)
     {
-        /** @var RelativeRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Relative::class);
-        $relative = $repository->find($id);
-        
         return $this->render(
             'relative/view.html.twig',
             [
@@ -84,12 +80,8 @@ class RelativeController extends AbstractController
     /**
      * @Route("relatives/{id}/update", name="relative_update", requirements={"id"="\d+"})
      */
-    public function update(Relative $relative, $id, Request $request)
+    public function update(Relative $relative, Request $request)
     {
-        /** @var RelativeRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Relative::class);
-        $relative = $repository->find($id);
-
         $relativeForm = $this->createForm(RelativeType::class, $relative);
         $relativeForm->handleRequest($request);
         if($relativeForm->isSubmitted() && $relativeForm->isValid()) {
@@ -118,12 +110,8 @@ class RelativeController extends AbstractController
     /**
      * @Route("relatives/{id}/delete", name="relative_delete", requirements={"id"="\d+"})
      */
-    public function delete(Relative $relative, $id)
+    public function delete(Relative $relative)
     {
-        /** @var RelativeRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Relative::class);
-        $relative = $repository->find($id);
-        
         $manager = $this->getDoctrine()->getManager(); 
         $manager->remove($relative);
         $manager->flush();
