@@ -55,7 +55,7 @@ class RelativeType extends AbstractType
             EntityType::class,
             [
                 "by_reference" => false, // to be able to write on the non-owner side of the relationship
-                "label" => "Foyer : choisir dans la liste ci-dessous, ou ",
+                "label" => "Foyer :",
                 "class" => Home::class,
                 "query_builder" => function (HomeRepository $repository) {
                     return $repository->queryAllByUser($this->security->getUser()->getId());

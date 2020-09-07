@@ -59,14 +59,13 @@
 							</div>
 						{% endfor %}
 					{% else %}
-						<a href="#">Ajouter mon foyer</a>
+						<a href="{{ path('home_add', { redirectTo: app.request.getPathInfo }) }}">Ajouter un foyer</a>
 					{% endif %}
 				</div>
 
 				<h2>Chez mes proches</h2>
 				{% if relativesHomes is not empty %}
-					<div
-						class="row">
+					<div class="row">
 						{# CARTE PROCHE #}
 						{% for home in relativesHomes %}
 							{% set meteo = meteos[home.id] %}
@@ -121,14 +120,14 @@
 						{% endfor %}
 					</div>
 				{% else %}
-					<a href="{{ path('home_add') }}">Ajouter des foyers</a>
+					<a href="{{ path('home_add', { redirectTo: app.request.getPathInfo }) }}">Ajouter des foyers</a>
 				{% endif %}
 				{# </div> #}
 			</div>
 		</div>
 	</div>
 
-	<div style="font-size:0.7em">Icons made by
+	<div class="mt-5" style="font-size:0.7em">Icons made by
 		<a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
 		from
 		<a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>

@@ -7,7 +7,7 @@
 <div class="d-flex flex-row justify-content-between">
     <h2>Liste des foyers</h2>
     <div>
-        <a href="{{ path('home_add') }}" class="btn btn-primary">Ajouter</a>
+        <a href="{{ path('home_add', { redirectTo: app.request.getPathInfo }) }}" class="btn btn-primary">Ajouter</a>
     </div>
 </div>
 
@@ -40,7 +40,7 @@
 {% else %}
 <h2>Liste des foyers</h2>
 <p>Aucun foyer créé pour le moment !</p>
-<a href="{{ path('home_add') }}" class="btn btn-primary">Ajouter des foyers</a>
+<a href="{{ path('home_add', { redirectTo: app.request.getPathInfo }) }}" class="btn btn-primary">Ajouter des foyers</a>
 {% endif %}
 
 {% endblock %}

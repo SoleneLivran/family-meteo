@@ -6,7 +6,7 @@
 <div class="d-flex flex-row justify-content-between">
     <h2>Liste des proches</h2>
     <div>
-        <a href="{{ path('relative_add') }}" class="btn btn-primary">Ajouter</a>
+        <a href="{{ path('relative_add', { redirectTo: app.request.getPathInfo }) }}" class="btn btn-primary">Ajouter</a>
     </div>
 </div>
 
@@ -23,7 +23,7 @@
 {% else %}
 <h2>Liste des proches</h2>
 <p>Aucun proche créé pour le moment !</p>
-<a href="{{ path('relative_add') }}" class="btn btn-primary">Ajouter des proches</a>
+<a href="{{ path('relative_add', { redirectTo: app.request.getPathInfo }) }}" class="btn btn-primary">Ajouter des proches</a>
 {% endif %}
 
 {% endblock %}

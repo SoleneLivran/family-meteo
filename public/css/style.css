@@ -78,7 +78,7 @@ form h1 {
   color: black;
 }
 
-form input {
+form input[type="input"] {
   margin-bottom: 1em;
 }
 
@@ -116,5 +116,13 @@ blockquote {
 
 .birthdays-list .birthday {
   background-color: rgb(255, 255, 255, 0.8);
+  text-align: left;
+}
+
+.new-home-link {
+  padding: 0.4em;
+}
+
+.homes-choice {
   text-align: left;
 }

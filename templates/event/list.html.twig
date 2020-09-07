@@ -19,7 +19,7 @@
     Aucun proche créé pour le moment !<br>
     Ajouter des proches pour voir ici leurs prochains anniversaires.
 </p>
-<a href="{{ path('relative_add') }}" class="btn btn-primary">Ajouter des proches</a>
+<a href="{{ path('relative_add', { redirectTo: app.request.getPathInfo }) }}" class="btn btn-primary">Ajouter des proches</a>
 {% endif %}
 
 {% endblock %}
