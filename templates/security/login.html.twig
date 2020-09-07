@@ -40,5 +40,8 @@
     </button>
 </form>
 
-<p>Pas encore de compte ? <a href="#">S'inscrire</a></p>
+{% if allow_registration %}
+<p>Pas encore de compte ? <a href="{{ path('app_register') }}">S'inscrire</a></p>
+{% endif %}
+
 {% endblock %}

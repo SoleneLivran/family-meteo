@@ -6,6 +6,7 @@
 parameters:
     oppenweathermap_api_key: '%env(resolve:OPENWEATHERMAPP_API_KEY)%'
     locationiq_api_key: '%env(resolve:LOCATIONIQ_API_KEY)%'
+    allow_registration: '%env(bool:ALLOW_REGISTRATION)%'
 
 services:
     # default configuration for services in *this* file

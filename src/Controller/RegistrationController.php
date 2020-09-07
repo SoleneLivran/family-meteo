@@ -19,6 +19,10 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, CustomFormAuthenticator $authenticator): Response
     {
+        if (!$this->getParameter('allow_registration')) {
+            throw $this->createNotFoundException();
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -37,12 +41,14 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
+            $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
+
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('registration/register.html.twig', [
