@@ -66,7 +66,7 @@ class RelativeController extends AbstractController
                 return $this->redirect($request->query->get('redirectTo'));
             }
 
-            return $this->redirectToRoute("relative_list");
+            return $this->redirectToRoute("home_list");
         }
 
         return $this->render(
@@ -95,7 +95,7 @@ class RelativeController extends AbstractController
                 return $this->redirect($request->query->get('redirectTo'));
             }
 
-            return $this->redirectToRoute("relative_list");
+            return $this->redirectToRoute("home_list");
         }
 
         return $this->render(
@@ -117,6 +117,6 @@ class RelativeController extends AbstractController
         $manager->flush();
         
         $this->addFlash("success", "Supprimé de la liste");
-        return $this->redirectToRoute('relative_list');
+        return $this->redirectToRoute('home_list');
     }
 }
