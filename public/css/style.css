@@ -2,7 +2,9 @@ body {
   background-image: url("../images/img/bg-img2.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
+  text-align: center;
+  font-family: 'Exo', sans-serif;
 }
 
 .navbar {
@@ -41,11 +43,73 @@ h1, h2, h3 {
 
 .user-home-meteo,
 .card {
-  background-color: rgb(255, 255, 255, 0.5);
+  background-color: rgb(255, 255, 255, 0.75);
   border: none;
   border-radius: 10px;
+  margin-bottom: 1em;
 }
 
 .user-home-meteo {
   padding: 1em;
+}
+
+.user-home-meteo h2 {
+  text-align: center;
+  color: black;
+}
+
+.btn {
+  border: none;
+}
+
+.btn:hover {
+  background-color: rgb(151, 76, 161);
+}
+
+form {
+  background-color: rgb(255, 255, 255, 0.8);
+  padding: 2em;
+  margin-bottom: 1em;
+  border: none;
+  border-radius: 10px;
+}
+
+form h1 {
+  color: black;
+}
+
+form input {
+  margin-bottom: 1em;
+}
+
+/* @import url('https://fonts.googleapis.com/css?family=Special+Elite'); */
+
+
+blockquote {
+  /* font-family: 'Special Elite', cursive; */
+  color: white;
+	font-weight: 100;
+	font-size: 1.3rem;
+	line-height: 1.4;
+  padding: .5rem;
+  font-style: italic;
+}
+
+.user-home-meteo .meteo-details {
+  text-align: left;
+}
+
+.user-home-meteo h4 {
+  text-align: center;
+  margin: 1em 0 0.5em 0;
+}
+
+.user-home-meteo .meteo-picture {
+  max-width: 100%;
+  object-fit: contain;
+  max-height: 300px;
+}
+
+.home-meteo {
+  text-align: left;
 }
