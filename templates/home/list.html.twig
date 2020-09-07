@@ -13,26 +13,25 @@
 
 <div class="row">
 {% for home in homes %}
-    <div class="card m-3" style="width: 18rem;">
-            <h4 class="card-header">
-                Foyer {{ home.name|capitalize }}
-                <a href="{{ path('home_update', {id: home.id}) }}"><i class="fas fa-edit float-right" style="font-size:0.7em"></i></a>
-            </h4>
-            <div class="card-body">
-            <p>À {{ home.cityName }} ({{ home.postCode }}, {{ home.country }})</p>
-            {% if home.getRelatives() is not empty %}
-            <h5>Membres du foyer :</h5>
-            <ul class="list-unstyled">
-            {% for relative in home.getRelatives() %}
-                <li>
-                <a href="{{ path('relative_view', {id: relative.id}) }}">{{ relative.getFullName }}</a>
-                </li>
-            {% endfor %}
-            </ul>
-            {% endif %}
-            {# <div class="text-right">
-                <a href="{{ path('home_update', {id: home.id}) }}">Modifier ce foyer</a>
-            </div> #}
+    <div class="col-md-4">
+        <div class="card">
+                <h4 class="card-header">
+                    Foyer {{ home.name|capitalize }}
+                    <a href="{{ path('home_update', {id: home.id}) }}"><i class="fas fa-edit float-right" style="font-size:0.7em"></i></a>
+                </h4>
+                <div class="card-body">
+                <p>À {{ home.cityName }} ({{ home.postCode }}, {{ home.country }})</p>
+                {% if home.getRelatives() is not empty %}
+                <h5>Membres du foyer :</h5>
+                <ul class="list-unstyled">
+                {% for relative in home.getRelatives() %}
+                    <li>
+                    <a href="{{ path('relative_view', {id: relative.id}) }}">{{ relative.getFullName }}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endfor %}

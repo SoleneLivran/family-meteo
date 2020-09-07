@@ -2,42 +2,95 @@
 
 {% block body %}
 
-<div class="d-flex flex-row justify-content-between">
-    <h2>{{ relative.getFullName() }}</h2>
-    <div>
-        <a href="{{ path('relative_update', {'id': relative.id}) }}" class="btn btn-primary">Modifier</a>
-    </div>
-</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<h4 class="card-header">
+					{{ relative.getFullName() }}
+					<a href="{{ path('relative_update', {'id': relative.id}) }}">
+						<i class="fas fa-edit float-right" style="font-size:0.7em"></i>
+					</a>
+				</h4>
+				<div class="card-body">
+					{% if relative.homes is not null %}
+						{% for home in relative.homes %}
+							<p>
+                                <i class="fas fa-home"></i> Habite à {{ home.cityName }} ({{ home.postCode }}, {{ home.country }})
+                            </p>
 
-{% if relative.homes is not null %}
-{% for home in relative.homes %}
-    <p>&#127968; Habite à {{ home.cityName }}, {{ home.postCode }}</p>
+								{% if home.getRelatives()|length() > 1 %}
+									<p class="mr-2">Avec
+										{% for homeRelative in home.getRelatives() %}
+											{% if homeRelative.id is not same as(relative.id) %}
+												
+												<a href="{{ path('relative_view', {id: homeRelative.id}) }}">
+													<i class="fas fa-user"></i> {{ homeRelative.firstname|capitalize }}
+												</a>
+												{# TODO {% if not loop.last %}
+												                        et
+												                        {% endif %} #}
+											{% endif %}
+										{% endfor %}
+									(foyer "{{ home.name|capitalize }}")
+									{% endif %}
+									</p>
+						{% endfor %}
+					{% endif %}
 
-    <div class="d-flex flex-row justify-content-left">
-        {% if home.getRelatives()|length() > 1 %}
-            <p class="mr-2">Avec
-                {% for homeRelative in home.getRelatives() %}
-                    {% if homeRelative.id is not same as(relative.id) %}
-                    &#128522;
-                    <a href="{{ path('relative_view', {id: homeRelative.id}) }}">
-                        {{ homeRelative.firstname|capitalize }}
-                    </a>
-                        {# TODO {% if not loop.last %}
-                        et
-                        {% endif %} #}
-                    {% endif %}
-                {% endfor %}
-            </p>
-        <p>(foyer "{{ home.name|capitalize }}")
-        {% endif %}</p>
-    </div>
-{% endfor %}
-{% endif %}
+					{% if relative.birthdate is not null %}
+						<p><i class="fas fa-birthday-cake"></i> Date de naissance :
+							{{ relative.birthdate|date("d\\/m\\/Y") }}</p>
+						<p>
+                            <i class="far fa-clock"></i> Âge : {{ relative.age }} ans
+                        </p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
 
-{% if relative.birthdate is not null %}
-<p>&#128197; Date de naissance : {{ relative.birthdate|date("d\\/m\\/Y") }}</p>
-<p>&#8986; Âge : {{ relative.age }} ans</p>
-{% endif %}
+	{# <div class="d-flex flex-row justify-content-between">
+		<h2>{{ relative.getFullName() }}</h2>
+		<div>
+			<a href="{{ path('relative_update', {'id': relative.id}) }}" class="btn btn-primary">Modifier</a>
+		</div>
+	</div>
+
+	{% if relative.homes is not null %}
+		{% for home in relative.homes %}
+			<p>&#127968; Habite à
+				{{ home.cityName }},
+				{{ home.postCode }}</p>
+
+			<div class="d-flex flex-row justify-content-left">
+				{% if home.getRelatives()|length() > 1 %}
+					<p class="mr-2">Avec
+						{% for homeRelative in home.getRelatives() %}
+							{% if homeRelative.id is not same as(relative.id) %}
+								&#128522;
+								<a href="{{ path('relative_view', {id: homeRelative.id}) }}">
+									{{ homeRelative.firstname|capitalize }}
+								</a>
+								{# TODO {% if not loop.last %}
+								                        et
+								                        {% endif %} #}
+							{# {% endif %}
+						{% endfor %}
+					</p>
+					<p>(foyer "{{ home.name|capitalize }}")
+					{% endif %}
+				</p>
+			</div>
+		{% endfor %}
+	{% endif %}
+
+	{% if relative.birthdate is not null %}
+		<p>&#128197; Date de naissance :
+			{{ relative.birthdate|date("d\\/m\\/Y") }}</p>
+		<p>&#8986; Âge :
+			{{ relative.age }}
+			ans</p>
+	{% endif %} #}
 
 
 {% endblock %}
