@@ -61,7 +61,7 @@ class HomeType extends AbstractType
             "relatives",
             EntityType::class,
             [
-                "label" => "Selectionner les membres du foyer, ou",
+                "label" => "Membres du foyer :",
                 "class" => Relative::class,
                 "query_builder" => function (RelativeRepository $repository) {
                     return $repository->queryAllByUser($this->security->getUser()->getId());

@@ -5,9 +5,12 @@
 <h2>Ajouter un foyer à la liste </h2>
 
 {{ form_start(homeForm) }}
-	{{ form_label(homeForm.relatives) }}
-	<a href="{{ path('relative_add', { redirectTo: app.request.getPathInfo }) }}" class="p-1 mb-2">cliquer ici pour créer une nouvelle personne</a>
-	{{ form_widget(homeForm.relatives) }}
+	<div class="relatives-choice">
+		{{ form_label(homeForm.relatives) }}
+		{{ form_widget(homeForm.relatives) }}
+		Choisir dans la liste ci-dessus, ou<a href="{{ path('relative_add', { redirectTo: app.request.getPathInfo }) }}" class="p-1 mb-2">cliquer ici pour créer une nouvelle personne</a>
+	</div>
+	<hr>
 	{{ form_row(homeForm.name) }}
 	{{ form_row(homeForm.isUserHome) }}
 	{{ form_row(homeForm.postCode) }}

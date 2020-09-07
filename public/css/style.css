@@ -62,8 +62,16 @@ h1, h2, h3 {
   border: none;
 }
 
+.btn-secondary {
+  background-color: rgb(179, 176, 172);
+}
+
 .btn:hover {
-  background-color: rgb(151, 76, 161);
+  background-color: rgb(151, 76, 161, 0.8);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(161, 120, 167, 0.8);
 }
 
 form {
@@ -124,5 +132,9 @@ blockquote {
 }
 
 .homes-choice {
+  text-align: left;
+}
+
+.relatives-choice {
   text-align: left;
 }
