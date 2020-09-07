@@ -113,3 +113,8 @@ blockquote {
 .home-meteo {
   text-align: left;
 }
+
+.birthdays-list .birthday {
+  background-color: rgb(255, 255, 255, 0.8);
+  text-align: left;
+}
