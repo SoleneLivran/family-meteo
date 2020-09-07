@@ -13,23 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class RelativeController extends AbstractController
 {
     /**
-     * @Route("/relatives", name="relative_list")
-     */
-    public function list(Request $request, RelativeRepository $repository)
-    {
-        /** @var RelativeRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Relative::class);
-        $relatives = $repository->findAllByUser($this->getUser()->getId());
-        
-        return $this->render(
-            'relative/list.html.twig',
-            [
-                "relatives" => $relatives
-            ]
-        );
-    }
-
-    /**
      * @Route("/relatives/{id}", name="relative_view", requirements={"id"="\d+"})
      */
     public function view(Relative $relative)
