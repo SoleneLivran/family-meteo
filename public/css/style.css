@@ -28,6 +28,10 @@ body {
   color: white;
 }
 
+.navbar-toggler {
+  color: white;
+}
+
 a {
   color: rgb(88, 76, 161);
 }
