@@ -100,7 +100,8 @@ class Relative
         // creates a new birthday object
         $birthday = new DateTime();
 
-        // in this new birthay : day and month of birthdate and current year
+        // in this new birthday : day and month of birthdate, and current year
+        // so we get : when is this person's birthday this year
         $birthday->setDate(
             date('Y'),
             $this->birthdate->format('m'),
@@ -108,7 +109,7 @@ class Relative
         );
         $birthday->setTime(0, 0, 0);
         
-        // if birthday is in the past (before today), set it to the next year
+        // if birthday is in the past (before today) : we are past their birthday this year -> next birthday will be next year
         if($birthday < new DateTime()) {
             $birthday->modify('+1 year');
         }
@@ -144,7 +145,6 @@ class Relative
 
     public function addHome(Home $home): self
     {
-        // die('ADD_HOME');
         if (!$this->homes->contains($home)) {
             $this->homes[] = $home;
             $home->addRelative($this);

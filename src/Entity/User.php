@@ -53,6 +53,7 @@ class User implements UserInterface
     {
         $this->relatives = new ArrayCollection();
         $this->homes = new ArrayCollection();
+        // TODO : ? "field declared dynamically"
         $this->userHomes = new ArrayCollection();
     }
 
@@ -67,6 +68,7 @@ class User implements UserInterface
      * @see UserInterface
      */
     public function getUsername(): string
+    // TODO : revoir php doc @see
     {
         return (string) $this->username;
     }

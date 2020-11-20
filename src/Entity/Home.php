@@ -64,6 +64,7 @@ class Home
      */
     private $isUserHome = false;
 
+    // TODO : revoir cette syntaxe et ArrayCollection
     public function __construct()
     {
         $this->relatives = new ArrayCollection();
@@ -79,6 +80,7 @@ class Home
         return $this->postCode;
     }
 
+    // TODO : revoir self
     public function setPostCode(string $postCode): self
     {
         $this->postCode = $postCode;
@@ -150,13 +152,13 @@ class Home
      * @return Collection|Relative[]
      */
     public function getRelatives(): Collection
+    // TODO : revoir collection
     {
         return $this->relatives;
     }
 
     public function addRelative(Relative $relative): self
     {
-        // die('ADD RELATIVE');
         if (!$this->relatives->contains($relative)) {
             $this->relatives[] = $relative;
             $relative->addHome($this);
