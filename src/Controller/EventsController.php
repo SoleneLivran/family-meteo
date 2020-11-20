@@ -12,8 +12,8 @@ class EventsController extends AbstractController
      * @Route("/events", name="event_list")
      */
     public function eventsCalendar() {
-        // Get all relatives (people) associated with connected user in the DB (=created by this user), by user's ID.
-        // Stored in "$relatives".
+        // Get all the relatives (people) associated with connected user in the DB (=created by this user), by user's ID.
+        // Stored in "$relatives"
         /** @var RelativeRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Relative::class);
         $relatives = $repository->findAllByUser($this->getUser()->getId());
@@ -38,6 +38,7 @@ class EventsController extends AbstractController
             return ($aBirthday < $bBirthday) ? -1 : 1;
         });
 
+        // send to view the relatives, sorted by next birthday
         return $this->render(
             'event/list.html.twig',
             [

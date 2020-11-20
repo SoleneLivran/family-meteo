@@ -18,7 +18,9 @@ class RegistrationController extends AbstractController
      * @Route("/register", name="app_register")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, CustomFormAuthenticator $authenticator): Response
+    // TODO : check PHPDoc
     {
+        // check if account creation is allowed for this environment. If not : not found exception
         if (!$this->getParameter('allow_registration')) {
             throw $this->createNotFoundException();
         }
@@ -39,7 +41,8 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+
+            // TODO : do anything else you need here, like send an email
 
             $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

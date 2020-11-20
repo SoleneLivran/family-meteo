@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
+// TODO : ??? I have no memory of all this. Généré automatiquement ?
 (new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
 
 if ($_SERVER['APP_DEBUG']) {

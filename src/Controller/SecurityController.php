@@ -13,7 +13,9 @@ class SecurityController extends AbstractController
      * @Route("/login", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
+        // TODO : check PHPDoc
     {
+        // if user is already connected, redirect to homepage
         if ($this->getUser()) {
             return $this->redirectToRoute('homepage');
         }
