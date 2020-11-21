@@ -41,7 +41,7 @@ class DefaultController extends AbstractController
         // Use meteoFinder service to get the meteo for all homes
         $meteos = $this->meteoFinder->getMeteo($homes);
 
-        // send to view : all meteos, user home(s), relatives home(s), and a quote from the quoteModel
+        // send to view : all meteos, user home(s), relatives home(s), and the quotes array from quoteModel
         return $this->render(
             'default/index.html.twig',
             [

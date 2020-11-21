@@ -6,7 +6,6 @@ class QuoteModel
 {
     public static function getQuote()
     {
-        // TODO : why random ?
         return self::$quote;
     }
 
