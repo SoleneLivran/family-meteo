@@ -68,9 +68,8 @@ class HomeType extends AbstractType
                     // list of relatives that were created by current user only
                     return $repository->queryAllByUser($this->security->getUser()->getId());
                 },
-                "choice_label" => function ($relative) {
+                "choice_label" => function (Relative $relative) {
                     // getFullName() declared in RelativeController
-                    // TODO : why not found ? (works fine)
                     return $relative->getFullName();
                 },
                 "multiple" => true,
