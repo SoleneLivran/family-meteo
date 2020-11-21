@@ -7,16 +7,21 @@ use App\Entity\Relative;
 use App\Form\RelativeType;
 use App\Repository\RelativeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RelativeController extends AbstractController
 {
     /**
      * @Route("/relatives/{id}", name="relative_view", requirements={"id"="\d+"})
+     *
+     * @param Relative $relative
+     *
+     * @return Response
      */
     public function view(Relative $relative)
-        // TODO : check PHPDoc
     {
         return $this->render(
             'relative/view.html.twig',
@@ -28,10 +33,12 @@ class RelativeController extends AbstractController
 
     /**
      * @Route("/relatives/add", name="relative_add")
-     * 
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
     public function add(Request $request)
-        // TODO : check PHPDoc
     {
         $relative = new Relative();
 
@@ -70,9 +77,13 @@ class RelativeController extends AbstractController
 
     /**
      * @Route("relatives/{id}/update", name="relative_update", requirements={"id"="\d+"})
+     *
+     * @param Relative $relative
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
     public function update(Relative $relative, Request $request)
-        // TODO : check PHPDoc
     {
         $relativeForm = $this->createForm(RelativeType::class, $relative);
         $relativeForm->handleRequest($request);
@@ -106,9 +117,12 @@ class RelativeController extends AbstractController
 
     /**
      * @Route("relatives/{id}/delete", name="relative_delete", requirements={"id"="\d+"})
+     *
+     * @param Relative $relative
+     *
+     * @return RedirectResponse
      */
     public function delete(Relative $relative)
-        // TODO : check PHPDoc
     {
         $manager = $this->getDoctrine()->getManager(); 
         $manager->remove($relative);

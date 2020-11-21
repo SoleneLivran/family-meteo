@@ -9,6 +9,7 @@ use App\Service\AddressCoordinatesFinder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
@@ -45,9 +46,12 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/homes/{id}", name="home_view", requirements={"id"="\d+"})
+     *
+     * @param Home $home
+     *
+     * @return Response
      */
     public function view(Home $home)
-        // TODO : check PHPDoc
     {
         return $this->render(
             'home/view.html.twig',
@@ -59,10 +63,12 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/home/add", name="home_add")
-     * 
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
     public function add(Request $request)
-        // TODO : check PHPDoc
     {
         $home = new Home();
 
@@ -112,9 +118,13 @@ class HomeController extends AbstractController
 
     /**
      * @Route("home/{id}/update", name="home_update", requirements={"id"="\d+"})
+     *
+     * @param Home $home
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
     public function update(Home $home, Request $request)
-        // TODO : check PHPDoc
     {
         $homeForm = $this->createForm(HomeType::class, $home);
         $homeForm->handleRequest($request);
@@ -159,9 +169,12 @@ class HomeController extends AbstractController
 
     /**
      * @Route("home/{id}/delete", name="home_delete", requirements={"id"="\d+"})
+     *
+     * @param Home $home
+     *
+     * @return RedirectResponse
      */
     public function delete(Home $home)
-        // TODO : check PHPDoc
     {
         $manager = $this->getDoctrine()->getManager(); 
         $manager->remove($home);

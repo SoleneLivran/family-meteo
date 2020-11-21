@@ -5,6 +5,8 @@ namespace App\Service;
 use App\Entity\Home;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
+use GuzzleHttp\Psr7\Response;
+use Throwable;
 
 class MeteoFinder
 {
@@ -20,8 +22,11 @@ class MeteoFinder
 
     /**
      * @param $homes Home[]
+     *
+     * @return array
+     *
+     * @throws Throwable
      */
-    // TODO : missing tags in phpdoc ?
     public function getMeteo(array $homes)
     {
         $client = new Client(['base_uri' => 'https://api.openweathermap.org']);
@@ -46,6 +51,7 @@ class MeteoFinder
         $responses = Promise\unwrap($promises);
 
         foreach ($responses as $key => $response) {
+            /** @var Response $response */
             $home = $homes[$key];
             $meteo = json_decode($response->getBody(), true);
             $meteos[$home->getId()] = $meteo;

@@ -68,7 +68,6 @@ class User implements UserInterface
      * @see UserInterface
      */
     public function getUsername(): string
-    // TODO : revoir php doc @see
     {
         return (string) $this->username;
     }

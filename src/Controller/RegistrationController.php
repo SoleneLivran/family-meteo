@@ -16,9 +16,15 @@ class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="app_register")
+     *
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param CustomFormAuthenticator $authenticator
+     *
+     * @return Response
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, CustomFormAuthenticator $authenticator): Response
-    // TODO : check PHPDoc
     {
         // check if account creation is allowed for this environment. If not : not found exception
         if (!$this->getParameter('allow_registration')) {
