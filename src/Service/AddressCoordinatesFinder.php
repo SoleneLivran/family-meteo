@@ -13,6 +13,7 @@ class AddressCoordinatesFinder
         $this->apiKey = $apiKey;
     }
 
+    // use locationIQ API to get address geographic infos, including latitude and longitude
     public function getLatitudeAndLongitude($city, $postalcode, $country)
     {   
         $client = new Client(['base_uri' => 'https://eu1.locationiq.com']);
@@ -26,6 +27,7 @@ class AddressCoordinatesFinder
             ],
         ]);
 
+        // TODO : ext-json missing ?
         return json_decode($res->getBody(), true);
     }
 }

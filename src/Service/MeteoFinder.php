@@ -21,6 +21,7 @@ class MeteoFinder
     /**
      * @param $homes Home[]
      */
+    // TODO : missing tags in phpdoc ?
     public function getMeteo(array $homes)
     {
         $client = new Client(['base_uri' => 'https://api.openweathermap.org']);
@@ -28,6 +29,7 @@ class MeteoFinder
         $promises = [];
         $meteos = [];
 
+        // use open weather map API to get weather info for each home
         foreach ($homes as $key => $home) {
             $promises[$key] = $client->requestAsync('GET', '/data/2.5/onecall', [
                 'query' => [
