@@ -27,7 +27,6 @@ class AddressCoordinatesFinder
             ],
         ]);
 
-        // TODO : ext-json missing ?
         return json_decode($res->getBody(), true);
     }
 }

@@ -53,8 +53,6 @@ class User implements UserInterface
     {
         $this->relatives = new ArrayCollection();
         $this->homes = new ArrayCollection();
-        // TODO : ? "field declared dynamically"
-        $this->userHomes = new ArrayCollection();
     }
 
     public function getId(): ?int
