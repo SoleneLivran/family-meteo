@@ -10,14 +10,21 @@ use Throwable;
 
 class MeteoFinder
 {
+    /** @var string */
     private $apiKey;
+
+    /** @var Client */
+    private $client;
 
     /**
      * Constructor
+     * @param string $apiKey
+     * @param Client $client
      */
-    public function __construct(string $apiKey)
+    public function __construct(string $apiKey, Client $client)
     {
         $this->apiKey = $apiKey;
+        $this->client = $client;
     }
 
     /**
@@ -29,14 +36,12 @@ class MeteoFinder
      */
     public function getMeteo(array $homes)
     {
-        $client = new Client(['base_uri' => 'https://api.openweathermap.org']);
-
         $promises = [];
         $meteos = [];
 
         // use open weather map API to get weather info for each home
         foreach ($homes as $key => $home) {
-            $promises[$key] = $client->requestAsync('GET', '/data/2.5/onecall', [
+            $promises[$key] = $this->client->requestAsync('GET', '/data/2.5/onecall', [
                 'query' => [
                     'lat' => $home->getLatitude(),
                     'lon' => $home->getLongitude(),
