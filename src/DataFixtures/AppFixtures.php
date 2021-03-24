@@ -93,7 +93,7 @@ class AppFixtures extends Fixture
          $nedStark = new Relative();
          $nedStark->setFirstname('Eddard');
          $nedStark->setLastname('Stark');
-         $nedStark->setBirthdate(new \DateTime("1970-04-23"));
+         $nedStark->setBirthdate(new \DateTime("1985-04-23"));
          $nedStark->setCreatedBy($testUser);
          $nedStark->addHome($starkHome);
          $manager->persist($nedStark);
@@ -101,7 +101,7 @@ class AppFixtures extends Fixture
          $catTully = new Relative();
          $catTully->setFirstname('Catelyn');
          $catTully->setLastname('Tully');
-         $catTully->setBirthdate(new \DateTime("1973-07-11"));
+         $catTully->setBirthdate(new \DateTime("1984-07-11"));
          $catTully->setCreatedBy($testUser);
          $catTully->addHome($starkHome);
          $catTully->addHome($tullyHome);
@@ -110,7 +110,7 @@ class AppFixtures extends Fixture
          $aryaStark = new Relative();
          $aryaStark->setFirstname('Arya');
          $aryaStark->setLastname('Stark');
-         $aryaStark->setBirthdate(new \DateTime("1995-03-23"));
+         $aryaStark->setBirthdate(new \DateTime("2010-03-23"));
          $aryaStark->setCreatedBy($testUser);
          $aryaStark->addHome($starkHome);
          $manager->persist($aryaStark);
@@ -118,7 +118,7 @@ class AppFixtures extends Fixture
          $edTully = new Relative();
          $edTully->setFirstname('Edmure');
          $edTully->setLastname('Tully');
-         $edTully->setBirthdate(new \DateTime("1976-02-11"));
+         $edTully->setBirthdate(new \DateTime("1986-02-11"));
          $edTully->setCreatedBy($testUser);
          $edTully->addHome($tullyHome);
          $manager->persist($edTully);
@@ -126,14 +126,14 @@ class AppFixtures extends Fixture
          $jonSnow = new Relative();
          $jonSnow->setFirstname('Jon');
          $jonSnow->setLastname('Snow');
-         $jonSnow->setBirthdate(new \DateTime("1990-10-20"));
+         $jonSnow->setBirthdate(new \DateTime("2007-10-20"));
          $jonSnow->setCreatedBy($testUser);
          $manager->persist($jonSnow);
 
          $robertBaratheon = new Relative();
          $robertBaratheon->setFirstname('Robert');
          $robertBaratheon->setLastname('Baratheon');
-         $robertBaratheon->setBirthdate(new \DateTime("1971-10-24"));
+         $robertBaratheon->setBirthdate(new \DateTime("1985-10-24"));
          $robertBaratheon->setCreatedBy($testUser);
          $robertBaratheon->addHome($baratheonHome);
          $manager->persist($robertBaratheon);
@@ -141,7 +141,7 @@ class AppFixtures extends Fixture
          $cerseiLannister = new Relative();
          $cerseiLannister->setFirstname('Cersei');
          $cerseiLannister->setLastname('Lannister');
-         $cerseiLannister->setBirthdate(new \DateTime("1979-01-16"));
+         $cerseiLannister->setBirthdate(new \DateTime("1990-01-16"));
          $cerseiLannister->setCreatedBy($testUser);
          $cerseiLannister->addHome($lannisterHome);
          $manager->persist($cerseiLannister);
@@ -149,7 +149,7 @@ class AppFixtures extends Fixture
          $tyrionLannister = new Relative();
          $tyrionLannister->setFirstname('Tyrion');
          $tyrionLannister->setLastname('Lannister');
-         $tyrionLannister->setBirthdate(new \DateTime("1984-08-17"));
+         $tyrionLannister->setBirthdate(new \DateTime("1997-08-17"));
          $tyrionLannister->setCreatedBy($testUser);
          $tyrionLannister->addHome($lannisterHome);
          $manager->persist($tyrionLannister);
