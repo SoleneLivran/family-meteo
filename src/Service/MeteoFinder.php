@@ -4,6 +4,8 @@ namespace App\Service;
 
 use App\Entity\Home;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7\Response;
 use Throwable;
@@ -53,7 +55,13 @@ class MeteoFinder
             ]);
         }
 
-        $responses = Promise\unwrap($promises);
+        try {
+            $responses = Promise\unwrap($promises);
+        } catch (ConnectException|ClientException $e) {
+            return [];
+        }
+
+        // if errors in $responses -> return []
 
         foreach ($responses as $key => $response) {
             /** @var Response $response */

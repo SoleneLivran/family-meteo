@@ -15,48 +15,52 @@
 				    <h2>À la maison</h2>
 					{% if userHomes is not empty %}
 						{% for home in userHomes %}
-							{% set meteo = meteos[home.id] %}
-							{% set icon =  meteo.current.weather[0].icon %}
-							{% set windInKmh = 3.114 %}
+							{% if meteos[home.id] is not defined %}
+								<p>Oh non ! Impossible de trouver la météo à la maison</p>
+							{% else %}
+								{% set meteo = meteos[home.id] %}
+								{% set icon =  meteo.current.weather[0].icon %}
+								{% set windInKmh = 3.114 %}
 
-                            {% if userHomes|length > 1 %}
-                                <h4>
-                                    Foyer
-                                    {{ home.name|capitalize }}
-                                </h4>
-                            {% endif %}
-							<div class="row">
-                                <div class="col-md-6 meteo-icon">
-                                    <img class="meteo-picture" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" alt="meteo"/>
-                                </div>
-                                <div class="meteo-details col-md-6 d-flex flex-column justify-content-center">
-                                    <p>
-                                        <img src="{{ asset('images/weathericons/temperature.png') }}" width="40px" alt="Temperature"/>
-                                        {{ meteo.current.temp|number_format }}
-                                        °C
-                                    </p>
-                                    <p>
-                                        <img src="{{ asset('images/weathericons/sunrise.png') }}" width="40px" alt="Lever du soleil"/>
-                                        {{ meteo.daily[0].sunrise|date("H\\hi") }}
-                                        <img src="{{ asset('images/weathericons/sunset.png') }}" width="40px" alt="Coucher du soleil"/>
-                                        {{ meteo.daily[0].sunset|date("H\\hi") }}
-                                    </p>
-                                    <p>
-                                        <img src="{{ asset('images/weathericons/wind.png') }}" width="40px" alt="Vent"/>
-                                        {{ (meteo.daily[0].wind_speed)*windInKmh|round }}
-                                        km/h
-                                    </p>
-                                    <div class="next-days">
-                                        <p>Jours à venir :</p>
-                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[1].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
-                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[2].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
-                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[3].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
-                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[4].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
-                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[5].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
-                                        <img src="{{ asset('images/weathericons/' ~ meteo.daily[6].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+								{% if userHomes|length > 1 %}
+									<h4>
+										Foyer
+										{{ home.name|capitalize }}
+									</h4>
+								{% endif %}
+								<div class="row">
+									<div class="col-md-6 meteo-icon">
+										<img class="meteo-picture" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" alt="meteo"/>
+									</div>
+									<div class="meteo-details col-md-6 d-flex flex-column justify-content-center">
+										<p>
+											<img src="{{ asset('images/weathericons/temperature.png') }}" width="40px" alt="Temperature"/>
+											{{ meteo.current.temp|number_format }}
+											°C
+										</p>
+										<p>
+											<img src="{{ asset('images/weathericons/sunrise.png') }}" width="40px" alt="Lever du soleil"/>
+											{{ meteo.daily[0].sunrise|date("H\\hi") }}
+											<img src="{{ asset('images/weathericons/sunset.png') }}" width="40px" alt="Coucher du soleil"/>
+											{{ meteo.daily[0].sunset|date("H\\hi") }}
+										</p>
+										<p>
+											<img src="{{ asset('images/weathericons/wind.png') }}" width="40px" alt="Vent"/>
+											{{ (meteo.daily[0].wind_speed)*windInKmh|round }}
+											km/h
+										</p>
+										<div class="next-days">
+											<p>Jours à venir :</p>
+											<img src="{{ asset('images/weathericons/' ~ meteo.daily[1].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+											<img src="{{ asset('images/weathericons/' ~ meteo.daily[2].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+											<img src="{{ asset('images/weathericons/' ~ meteo.daily[3].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+											<img src="{{ asset('images/weathericons/' ~ meteo.daily[4].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+											<img src="{{ asset('images/weathericons/' ~ meteo.daily[5].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+											<img src="{{ asset('images/weathericons/' ~ meteo.daily[6].weather[0].icon ~'.png') }}" width="40px" alt="Temperature"/>
+										</div>
 									</div>
 								</div>
-							</div>
+							{% endif %}
 						{% endfor %}
 					{% else %}
 						<a href="{{ path('home_add', { redirectTo: app.request.getPathInfo }) }}">Ajouter un foyer</a>
@@ -68,54 +72,59 @@
 					<div class="row">
 						{# CARTE PROCHE #}
 						{% for home in relativesHomes %}
-							{% set meteo = meteos[home.id] %}
-							{% set icon =  meteo.current.weather[0].icon %}
-							{% set windInKmh = 3.114 %}
-							{% if home.isUserHome == false %}
-								<div class="col-md-4">
-									<div class="card">
-										<div class="card-body">
-											<div class="card-title flex">
-												{% if home.relatives is not empty %}
-													<h5>
+							{% if meteos[home.id] is not defined %}
+								<ul>
+									<li>Oh non ! Impossible de trouver la météo pour le foyer {{ home.name }} ({{ home.cityName }})</li>
+								</ul>
+							{% else %}
+								{% set meteo = meteos[home.id] %}
+								{% set icon =  meteo.current.weather[0].icon %}
+								{% set windInKmh = 3.114 %}
+								{% if home.isUserHome == false %}
+									<div class="col-md-4">
+										<div class="card">
+											<div class="card-body">
+												<div class="card-title flex">
+													{% if home.relatives is not empty %}
+														<h5>
+															Chez
+															{% for relative in home.relatives %}
+																{% if not loop.first %}
+																	et
+																{% endif %}
+																<a href="{{ path('relative_view', {id: relative.id}) }}">
+																	{{ relative.firstname|capitalize }}
+																</a>
+															{% endfor %}
+														</h5>
+													{% endif %}
+													<ph6>À
+														{{ home.cityName }}</ph6>
+												</div>
+												<img class="card-img-top mb-3" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" alt="{{ meteo.current.weather[0].description }}"/>
 
-														Chez
-														{% for relative in home.relatives %}
-															{% if not loop.first %}
-																et
-															{% endif %}
-															<a href="{{ path('relative_view', {id: relative.id}) }}">
-																{{ relative.firstname|capitalize }}
-															</a>
-														{% endfor %}
-													</h5>
-												{% endif %}
-												<ph6>À
-													{{ home.cityName }}</ph6>
-											</div>
-											<img class="card-img-top mb-3" src="{{ asset('images/weathericons/' ~ icon ~ '.png') }}" alt="{{ meteo.current.weather[0].description }}"/>
-
-											<div class="home-meteo">
-												<p>
-													<img src="{{ asset('images/weathericons/temperature.png') }}" width="40px" alt="Temperature"/>
-													{{ meteo.current.temp|number_format }}
-													°C
-												</p>
-												<p>
-													<img src="{{ asset('images/weathericons/sunrise.png') }}" width="40px" alt="Lever du soleil"/>
-													{{ meteo.daily[0].sunrise|date("H\\hi") }}
-													<img src="{{ asset('images/weathericons/sunset.png') }}" width="40px" alt="Coucher du soleil"/>
-													{{ meteo.daily[0].sunset|date("H\\hi") }}
-												</p>
-												<p>
-													<img src="{{ asset('images/weathericons/wind.png') }}" width="40px" alt="Vent"/>
-													{{ (meteo.daily[0].wind_speed)*windInKmh|round }}
-													km/h
-												</p>
+												<div class="home-meteo">
+													<p>
+														<img src="{{ asset('images/weathericons/temperature.png') }}" width="40px" alt="Temperature"/>
+														{{ meteo.current.temp|number_format }}
+														°C
+													</p>
+													<p>
+														<img src="{{ asset('images/weathericons/sunrise.png') }}" width="40px" alt="Lever du soleil"/>
+														{{ meteo.daily[0].sunrise|date("H\\hi") }}
+														<img src="{{ asset('images/weathericons/sunset.png') }}" width="40px" alt="Coucher du soleil"/>
+														{{ meteo.daily[0].sunset|date("H\\hi") }}
+													</p>
+													<p>
+														<img src="{{ asset('images/weathericons/wind.png') }}" width="40px" alt="Vent"/>
+														{{ (meteo.daily[0].wind_speed)*windInKmh|round }}
+														km/h
+													</p>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
+								{% endif %}
 							{% endif %}
 						{% endfor %}
 					</div>
