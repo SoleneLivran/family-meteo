@@ -56,6 +56,7 @@ class MeteoFinder
         }
 
         try {
+            // TODO : use Guzzle settle() function to handle failed and fulfilled promises
             $responses = Promise\unwrap($promises);
         } catch (ConnectException|ClientException $e) {
             return [];
