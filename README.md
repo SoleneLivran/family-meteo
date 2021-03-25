@@ -1,5 +1,5 @@
 # Family meteo
-![example branch parameter](https://github.com/SoleneLivran/family-meteo/actions/workflows/ci.yml/badge.svg?branch=master)
+[![example branch parameter](https://github.com/SoleneLivran/family-meteo/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/SoleneLivran/family-meteo/actions/workflows/ci.yml)
 
 (English below)
 
