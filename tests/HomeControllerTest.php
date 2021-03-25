@@ -5,7 +5,7 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Repository\UserRepository;
 
-class HomeTest extends WebTestCase
+class HomeControllerTest extends WebTestCase
 {
     // check if user can access homes list when connected
     public function testHomepageAccessWhileLoggedIn()
