@@ -1,4 +1,6 @@
 # Family meteo
+![example branch parameter](https://github.com/SoleneLivran/family-meteo/actions/workflows/ci.yml/badge.svg?branch=master)
+
 (English below)
 
 Projet personnel | Symfony
