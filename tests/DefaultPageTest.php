@@ -25,5 +25,12 @@ class DefaultPageTest extends WebTestCase
         $this->assertSelectorTextContains('h1', 'Testuser');
     }
 
-    // check if user if redirected to login if trying to access homepage when not connected
+    // check if user if redirected to /login if trying to access homepage when not connected
+    public function testHomepageRedirectToLogin()
+    {
+        $client = self::createClient();
+        $client->request('GET', '/');
+
+        $this->assertSame('/login', $client->getResponse()->headers->get('Location'));
+    }
 }
