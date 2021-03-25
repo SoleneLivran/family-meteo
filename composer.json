@@ -1,4 +1,6 @@
 {
+    "name": "solenelivran/family-meteo",
+    "description": "Family Meteo",
     "type": "project",
     "license": "proprietary",
     "require": {

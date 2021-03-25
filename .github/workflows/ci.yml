@@ -26,24 +26,15 @@ jobs:
       - uses: php-actions/composer@v5
 
       - name: Validate composer.json and composer.lock
-        run: composer validate --strict
+        run: composer validate
 
       - name: Check vendors security vulnerabilities
         run: symfony check:security
 
-      - name: Check Symfony requirements
-        run: vendor/bin/requirements-checker
-
-      - name: Validate doctrine schema
-        run: bin/console doctrine:schema:validate
-        env:
-          APP_ENV: test
-          APP_DEBUG: 1
-
       - name: Initialize MySQL database
         run: |
           bin/console doctrine:database:create --no-interaction
-          bin/console doctrine:migrations:migrate --no-interaction
+          bin/console doctrine:schema:update --force --no-interaction
         env:
           APP_ENV: test
           APP_DEBUG: 1
@@ -61,4 +52,8 @@ jobs:
           APP_ENV: test
           APP_DEBUG: 1
 
-      - uses: php-actions/phpunit@v2
+      - name: Run phpunit test suite
+        run: bin/phpunit
+        env:
+          APP_ENV: test
+          APP_DEBUG: 1
