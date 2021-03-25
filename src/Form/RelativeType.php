@@ -17,6 +17,7 @@ class RelativeType extends AbstractType
 {
     private $security;
 
+    // inject Security to be able to get "user"
     public function __construct(Security $security)
     {
         $this->security = $security;
@@ -58,6 +59,7 @@ class RelativeType extends AbstractType
                 "label" => "Foyer :",
                 "class" => Home::class,
                 "query_builder" => function (HomeRepository $repository) {
+                    // list of homes that were created by current user only
                     return $repository->queryAllByUser($this->security->getUser()->getId());
                 },
                 "choice_label" => "name",

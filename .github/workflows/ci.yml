@@ -1,0 +1,59 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: symfony
+
+      - uses: php-actions/composer@v5
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Check vendors security vulnerabilities
+        run: symfony check:security
+
+      - name: Initialize MySQL database
+        run: |
+          bin/console doctrine:database:create --no-interaction
+          bin/console doctrine:schema:update --force --no-interaction
+        env:
+          APP_ENV: test
+          APP_DEBUG: 1
+
+      - name: Loading data fixtures
+        run: |
+          bin/console doctrine:fixtures:load --no-interaction
+        env:
+          APP_ENV: test
+          APP_DEBUG: 1
+
+      - name: Validate doctrine schema
+        run: bin/console doctrine:schema:validate
+        env:
+          APP_ENV: test
+          APP_DEBUG: 1
+
+      - name: Run phpunit test suite
+        run: bin/phpunit
+        env:
+          APP_ENV: test
+          APP_DEBUG: 1

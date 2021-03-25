@@ -21,6 +21,8 @@ class RelativeRepository extends ServiceEntityRepository
         parent::__construct($registry, Relative::class);
     }
 
+    // TODO : Check if undestood
+    // Create a query : what parameters will be used to question the database
     public function queryAllByUser($userId): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('relative');
@@ -35,13 +37,14 @@ class RelativeRepository extends ServiceEntityRepository
 
     public function findAllByUser($userId)
     {
+        // prepare the previously constructed query
         $queryBuilder = $this->queryAllByUser($userId);
 
-        // a la fin je recupère a la requete fabriquée
+        // retrieve the constructed query in $query
         $query = $queryBuilder->getQuery();
 
-        // j'execute la requete pour en recupérer les resultats
-        // getResult me renvoi une LISTE des resultats 
+        // execute the query and get results
+        // getResult sends a list of results
         return $query->getResult();
     }
 }

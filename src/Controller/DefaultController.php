@@ -12,6 +12,7 @@ class DefaultController extends AbstractController
 {
     private $meteoFinder;
 
+    // inject MeteoFinder service
     public function __construct(MeteoFinder $meteoFinder)
     {
         $this->meteoFinder = $meteoFinder;
@@ -22,20 +23,25 @@ class DefaultController extends AbstractController
      */
     public function homepage()
     {
-        // Get all homes for connected user
+        // Get all homes associated with connected user in the DB (=created by this user), by user's ID.
+        // Stored in "$homes".
         /** @var HomeRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Home::class);
         $homes = $repository->findAllByUser($this->getUser()->getId());
 
+        // Among all homes associated to the user : find the one(s) with data "isUserHome == true" = where user lives
         $userHomes = array_filter($homes, function(Home $home) {
             return $home->isUserHome();
         });
+        // Among all homes associated to the user : find the one(s) with data "isUserHome == false" = where user's relatives/family live
         $relativesHomes = array_filter($homes, function(Home $home) {
             return !$home->isUserHome();
         });
 
+        // Use meteoFinder service to get the meteo for all homes
         $meteos = $this->meteoFinder->getMeteo($homes);
-        
+
+        // send to view : all meteos, user home(s), relatives home(s), and the quotes array from quoteModel
         return $this->render(
             'default/index.html.twig',
             [

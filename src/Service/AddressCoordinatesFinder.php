@@ -6,17 +6,27 @@ use GuzzleHttp\Client;
 
 class AddressCoordinatesFinder
 {
+    /** @var string */
     private $apiKey;
 
-    public function __construct(string $apiKey)
+    /** @var Client */
+    private $client;
+
+    /**
+     * AddressCoordinatesFinder constructor.
+     * @param string $apiKey
+     * @param Client $client
+     */
+    public function __construct(string $apiKey, Client $client)
     {
         $this->apiKey = $apiKey;
+        $this->client = $client;
     }
 
+    // use locationIQ API to get address geographic infos, including latitude and longitude
     public function getLatitudeAndLongitude($city, $postalcode, $country)
-    {   
-        $client = new Client(['base_uri' => 'https://eu1.locationiq.com']);
-        $res = $client->request('GET', '/v1/search.php', [
+    {
+        $res = $this->client->request('GET', '/v1/search.php', [
             'query' => [
                 'key' => $this->apiKey,
                 'city' => $city,

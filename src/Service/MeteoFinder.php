@@ -4,32 +4,46 @@ namespace App\Service;
 
 use App\Entity\Home;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Promise;
+use GuzzleHttp\Psr7\Response;
+use Throwable;
 
 class MeteoFinder
 {
+    /** @var string */
     private $apiKey;
+
+    /** @var Client */
+    private $client;
 
     /**
      * Constructor
+     * @param string $apiKey
+     * @param Client $client
      */
-    public function __construct(string $apiKey)
+    public function __construct(string $apiKey, Client $client)
     {
         $this->apiKey = $apiKey;
+        $this->client = $client;
     }
 
     /**
      * @param $homes Home[]
+     *
+     * @return array
+     *
+     * @throws Throwable
      */
     public function getMeteo(array $homes)
     {
-        $client = new Client(['base_uri' => 'https://api.openweathermap.org']);
-
         $promises = [];
         $meteos = [];
 
+        // use open weather map API to get weather info for each home
         foreach ($homes as $key => $home) {
-            $promises[$key] = $client->requestAsync('GET', '/data/2.5/onecall', [
+            $promises[$key] = $this->client->requestAsync('GET', '/data/2.5/onecall', [
                 'query' => [
                     'lat' => $home->getLatitude(),
                     'lon' => $home->getLongitude(),
@@ -41,9 +55,17 @@ class MeteoFinder
             ]);
         }
 
-        $responses = Promise\unwrap($promises);
+        try {
+            // TODO : use Guzzle settle() function to handle failed and fulfilled promises
+            $responses = Promise\unwrap($promises);
+        } catch (ConnectException|ClientException $e) {
+            return [];
+        }
+
+        // if errors in $responses -> return []
 
         foreach ($responses as $key => $response) {
+            /** @var Response $response */
             $home = $homes[$key];
             $meteo = json_decode($response->getBody(), true);
             $meteos[$home->getId()] = $meteo;

@@ -53,7 +53,6 @@ class User implements UserInterface
     {
         $this->relatives = new ArrayCollection();
         $this->homes = new ArrayCollection();
-        $this->userHomes = new ArrayCollection();
     }
 
     public function getId(): ?int

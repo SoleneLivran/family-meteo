@@ -1,10 +1,13 @@
 {
+    "name": "solenelivran/family-meteo",
+    "description": "Family Meteo",
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.2.5",
+        "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "composer/package-versions-deprecated": "1.10.99.1",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.1",
@@ -42,12 +45,13 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
-        "symfony/browser-kit": "^5.1",
-        "symfony/css-selector": "^5.1",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "symfony/browser-kit": "5.1.*",
+        "symfony/css-selector": "5.1.*",
         "symfony/debug-bundle": "^5.1",
         "symfony/maker-bundle": "^1.0",
         "symfony/monolog-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^5.1",
+        "symfony/phpunit-bridge": "^5.2",
         "symfony/stopwatch": "^5.1",
         "symfony/twig-bundle": "^5.1",
         "symfony/var-dumper": "^5.1",

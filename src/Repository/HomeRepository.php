@@ -20,6 +20,8 @@ class HomeRepository extends ServiceEntityRepository
         parent::__construct($registry, Home::class);
     }
 
+    // TODO : Check if undestood
+    // Create a query : what parameters will be used to question the database
     public function queryAllByUser($userId): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('home');
@@ -35,40 +37,14 @@ class HomeRepository extends ServiceEntityRepository
 
     public function findAllByUser($userId)
     {
+        // prepare the previously constructed query
         $queryBuilder = $this->queryAllByUser($userId);
 
+        // retrieve the constructed query in $query
         $query = $queryBuilder->getQuery();
 
-        // me renvoi UN seul resultat 
+        // execute the query and get results
+        // getResult sends a list of results
         return $query->getResult();
     }
-
-    // /**
-    //  * @return Home[] Returns an array of Home objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('h.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Home
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
