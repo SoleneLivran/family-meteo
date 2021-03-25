@@ -6,8 +6,59 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+
     steps:
       - uses: actions/checkout@v2
-      - uses: php-actions/composer@v5 # or alternative dependency management
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: symfony
+
+      - uses: php-actions/composer@v5
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Check vendors security vulnerabilities
+        run: symfony check:security
+
+      - name: Check Symfony requirements
+        run: vendor/bin/requirements-checker
+
+      - name: Validate doctrine schema
+        run: bin/console doctrine:schema:validate
+        env:
+          APP_ENV: test
+          APP_DEBUG: 1
+
+      - name: Initialize MySQL database
+        run: |
+          bin/console doctrine:database:create --no-interaction
+          bin/console doctrine:migrations:migrate --no-interaction
+        env:
+          APP_ENV: test
+          APP_DEBUG: 1
+
+      - name: Loading data fixtures
+        run: |
+          bin/console doctrine:fixtures:load --no-interaction
+        env:
+          APP_ENV: test
+          APP_DEBUG: 1
+
+      - name: Validate doctrine schema
+        run: bin/console doctrine:schema:validate
+        env:
+          APP_ENV: test
+          APP_DEBUG: 1
+
       - uses: php-actions/phpunit@v2
-    # ... then your own project steps ...
