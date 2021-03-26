@@ -31,6 +31,11 @@ class RegistrationController extends AbstractController
             throw $this->createNotFoundException();
         }
 
+        // if user is already connected, redirect to homepage
+        if ($this->getUser()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -47,8 +52,6 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
-            // TODO : do anything else you need here, like send an email
 
             $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
