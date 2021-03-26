@@ -19,7 +19,6 @@ class RelativeControllerTest extends WebTestCase
         // simulate $testUser being logged in
         $client->loginUser($testUser);
 
-        // test e.g. the profile page
         $client->request('GET', '/relatives/1');
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h4', 'Eddard Stark');
