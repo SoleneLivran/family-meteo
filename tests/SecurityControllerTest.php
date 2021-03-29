@@ -15,6 +15,7 @@ class SecurityControllerTest extends WebTestCase
         ];
     }
 
+    // test access to login and register is ok for not connected users
     /**
      * @dataProvider provideUrls
      * @param $url
@@ -27,8 +28,7 @@ class SecurityControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful());
     }
 
-    // test if redirected to homepage if already connected
-
+    // test if redirected to homepage from login and register if already connected
     /**
      * @dataProvider provideUrls
      * @param $url
@@ -47,4 +47,9 @@ class SecurityControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'Testuser');
     }
+
+    // TODO : test if access fromm login page to register page is ok when clicking on link
+
+    // TODO : test "se connecter" nav-link is not displayed on login page
+    // (feature to be developed)
 }
